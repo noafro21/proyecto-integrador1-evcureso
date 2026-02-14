@@ -38,9 +38,13 @@ Los mensajes de commit deben ser descriptivos y seguir el formato: tipo: descrip
 
 #### Tipos de commit permitidos:
 
-- feat: Nueva funcionalidad.
+- feat: Nueva funcionalidad o recurso en el programa que no existía.
 
 - fix: Corrección de un error (bug).
+
+- updated: se reemplazó un recurso o código por otro realizado por alguien más (ejemplo: una prueba para la ventana de inicio de sesión).
+
+- incomplete: commit especial que indica que se ha respaldado una versión inestable o incompleta de la funcionalidad.
 
 - docs: Cambios en la documentación (.md).
 
