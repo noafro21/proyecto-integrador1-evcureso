@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceder - Evcureso</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/images/favicon-3.png"
+        onerror="this.href='https://via.placeholder.com/32x32?text=E'">
+
+    <!-- Fuentes de Google: Montserrat (Títulos) y Open Sans (Cuerpos) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS (CDN), NORMALIZE -->
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <!-- ==========================================
+         HEADER MINIMALISTA (Solo Logo y Regresar)
+         ========================================== -->
+    <header class="evc-header text-white bg-dark shadow-sm">
+        <nav class="evc-nav navbar navbar-dark container" aria-label="Navegación de autenticación">
+            <a class="navbar-brand d-flex align-items-center" href="index.html"
+                aria-label="Volver a la página de inicio">
+                <img src="assets/images/logo-1.png" alt="Logo de Evcureso" width="100" height="40" class="me-2"
+                    onerror="this.src='https://via.placeholder.com/40x40?text=E'">
+            </a>
+            <div class="d-flex">
+                <a href="index.html" class="btn btn-outline-light btn-sm evc-btn-back" aria-label="Regresar a Explorar">
+                    ← Volver a Explorar
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ==========================================
+         CONTENEDOR PRINCIPAL DE AUTENTICACIÓN
+         ========================================== -->
+    <main class="evc-auth-container container my-5 d-flex justify-content-center">
+
+        <!-- Tarjeta Central que contiene los formularios -->
+        <section class="evc-auth-card card shadow border-0 w-100" style="max-width: 500px;" aria-labelledby="auth-tabs">
+
+            <!-- Pestañas de Navegación (Login / Registro) -->
+            <header class="card-header bg-white border-bottom-0 pt-4 pb-0">
+                <ul class="nav nav-tabs card-header-tabs evc-auth-tabs" id="auth-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active fw-bold text-dark evc-tab-btn" id="login-tab"
+                            data-bs-toggle="tab" data-bs-target="#login-pane" type="button" role="tab"
+                            aria-controls="login-pane" aria-selected="true">
+                            Iniciar Sesión
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link fw-bold text-secondary evc-tab-btn" id="register-tab"
+                            data-bs-toggle="tab" data-bs-target="#register-pane" type="button" role="tab"
+                            aria-controls="register-pane" aria-selected="false">
+                            Registrarse
+                        </button>
+                    </li>
+                </ul>
+            </header>
+
+            <div class="card-body p-4 tab-content" id="auth-tab-content">
+
+                <!-- PANEL 1: INICIAR SESIÓN -->
+                <div class="tab-pane fade show active" id="login-pane" role="tabpanel" aria-labelledby="login-tab"
+                    tabindex="0">
+                    <div class="text-center mb-4">
+                        <h1 class="h4 fw-bold mb-1">¡Hola de nuevo!</h1>
+                        <p class="text-muted small">Ingresa tus credenciales para continuar.</p>
+                    </div>
+
+                    <form id="evcLoginForm" class="evc-form">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label fw-bold small">Correo Electrónico</label>
+                            <input type="email" class="form-control evc-input" id="loginEmail"
+                                placeholder="ejemplo@correo.com" required autocomplete="email">
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <label for="loginPassword" class="form-label fw-bold small m-0">Contraseña</label>
+                                <a href="#" class="small text-decoration-none evc-link-forgot">¿Olvidaste tu
+                                    contraseña?</a>
+                            </div>
+                            <input type="password" class="form-control evc-input mt-2" id="loginPassword"
+                                placeholder="••••••••" required autocomplete="current-password">
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn btn-primary fw-bold evc-btn-submit py-2">Ingresar a
+                                Evcureso</button>
+                        </div>
+                    </form>
+
+                    <!-- ACORDEÓN DE PRUEBAS (Requerimiento Minuta/RNF-04) -->
+                    <div class="accordion mt-4" id="testCredentialsAccordion">
+                        <div class="accordion-item border-info">
+                            <h2 class="accordion-header">
+                                <button
+                                    class="accordion-button collapsed bg-info bg-opacity-10 text-dark py-2 px-3 small fw-bold"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseCredentials"
+                                    aria-expanded="false" aria-controls="collapseCredentials">
+                                    🛠️ Credenciales de Prueba (Fase Dev)
+                                </button>
+                            </h2>
+                            <div id="collapseCredentials" class="accordion-collapse collapse"
+                                data-bs-parent="#testCredentialsAccordion">
+                                <div class="accordion-body small bg-light">
+                                    <ul class="list-unstyled mb-0 text-muted">
+                                        <li class="mb-2"><strong>Promotor:</strong><br> p_adi_kamakiri@gmail.com /
+                                            asd123</li>
+                                        <li class="mb-2"><strong>Explorador:</strong><br>
+                                            initado_adi_aguacaliente@gmail.com / qwe123</li>
+                                        <li><strong>Moderador:</strong><br> validador_adi_ba@gmail.com / zxc123</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL 2: REGISTRO DE USUARIO -->
+                <div class="tab-pane fade" id="register-pane" role="tabpanel" aria-labelledby="register-tab"
+                    tabindex="0">
+                    <div class="text-center mb-4">
+                        <h2 class="h4 fw-bold mb-1">Crea tu cuenta</h2>
+                        <p class="text-muted small">Únete para descubrir y guardar eventos locales.</p>
+                    </div>
+
+                    <form id="evcRegisterForm" class="evc-form">
+                        <div class="mb-3">
+                            <label for="regFullName" class="form-label fw-bold small">Nombre Completo</label>
+                            <input type="text" class="form-control evc-input" id="regFullName" placeholder="Juan Pérez"
+                                required autocomplete="name">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="regEmail" class="form-label fw-bold small">Correo Electrónico</label>
+                            <input type="email" class="form-control evc-input" id="regEmail"
+                                placeholder="ejemplo@correo.com" required autocomplete="email">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="regPassword" class="form-label fw-bold small">Contraseña</label>
+                            <input type="password" class="form-control evc-input" id="regPassword"
+                                placeholder="Crea una contraseña segura" required autocomplete="new-password">
+                            <!-- Nota miniatura de la minuta: No hay encriptación exigida para el usuario visualmente, pero es buena práctica indicarlo -->
+                            <div class="form-text small">Mínimo 6 caracteres.</div>
+                        </div>
+
+                        <!-- Opción de Promotor (RF-02) -->
+                        <div class="card bg-light border-0 mb-4 p-3 rounded">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input evc-switch-input" type="checkbox" role="switch"
+                                    id="regIsPromotor">
+                                <label class="form-check-label small fw-bold text-dark" for="regIsPromotor">
+                                    Quiero ser Promotor de Eventos
+                                </label>
+                            </div>
+                            <p class="small text-muted mb-0 mt-1" id="promotorHelpText">
+                                Tu cuenta será creada como "Explorador". Si activas esto, se enviará una solicitud al
+                                Moderador para habilitar funciones de publicación.
+                            </p>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success fw-bold evc-btn-submit py-2">Crear
+                                Cuenta</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Bootstrap 5 JS Bundle (CDN) para el funcionamiento de las pestañas (Tabs) y Acordeón -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
