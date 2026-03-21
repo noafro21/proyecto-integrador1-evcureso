@@ -170,6 +170,122 @@
 
                 </div>
             </aside>
+
+            <!-- FEED DE EVENTOS (Lista central) - Ocupa 4 columnas en desktop -->
+            <section class="evc-event-feed col-12 col-md-4 mb-3" aria-labelledby="feed-title">
+                <h2 id="feed-title" class="visually-hidden">Lista de Eventos Cercanos</h2>
+
+                <!-- Encabezado de la lista -->
+                <div class="d-flex justify-content-between align-items-center mb-3 px-1">
+                    <h3 class="h5 m-0 fw-bold">Eventos cerca de ti</h3>
+                    <span class="badge bg-primary rounded-pill evc-feed-counter" aria-label="2 eventos encontrados"
+                        role="alert">2
+                        cerca</span>
+                </div>
+
+                <!-- Contenedor scrolleable para las tarjetas -->
+                <div class="evc-feed-container overflow-auto" style="max-height: 75vh;" tabindex="0"
+                    aria-label="Lista de tarjetas de eventos" role="list">
+
+                    <!-- ==========================================
+                         TARJETA 1: Evento Oficial 
+                         ========================================== -->
+                    <article class="evc-event-card card mb-3 shadow-sm border-0" aria-labelledby="event-title-1">
+                        <!-- Imagen de cabecera pcional) -->
+                        <img src="https://via.placeholder.com/400x150?text=Concierto"
+                            class="card-img-top evc-event-image"
+                            alt="Fotografía del escenario del concierto al aire libre">
+
+                        <div class="card-body">
+                            <!-- Metadatos: Tipo de fuente y Fecha -->
+                            <header class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-success evc-badge-official"
+                                    title="Publicado por un promotor verificado">Oficial</span>
+                                <!-- Etiqueta <time> con atributo datetime para máquinas -->
+                                <time datetime="2026-03-20T19:00" class="small text-muted fw-bold evc-event-date">Vie 20
+                                    Mar, 19:00</time>
+                            </header>
+
+                            <!-- Título y Descripción -->
+                            <h4 id="event-title-1" class="card-title h6 fw-bold evc-event-title">Concierto Sinfónico al
+                                Aire Libre</h4>
+                            <p class="card-text small text-muted evc-event-desc">Disfruta de una noche mágica con la
+                                orquesta sinfónica tocando clásicos en el parque principal. Evento para toda la familia.
+                            </p>
+
+                            <!-- Ubicación -->
+                            <address class="small text-muted mb-2 evc-event-location">
+                                📍 Parque Central de Copalchi
+                            </address>
+
+                            <!-- Etiquetas/Categorías -->
+                            <div class="evc-event-tags mb-3" aria-label="Categorías del evento" role="banner">
+                                <span class="badge bg-light text-dark border evc-tag">#Cultura</span>
+                                <span class="badge bg-light text-dark border evc-tag">#AireLibre</span>
+                            </div>
+                        </div>
+
+                        <!-- Pie de la tarjeta: Acciones de usuario -->
+                        <footer
+                            class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-sm btn-outline-primary evc-btn-locate"
+                                aria-label="Ver ubicación del Concierto Sinfónico en el mapa">
+                                🗺️ Ver en mapa
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-success evc-btn-save-plan"
+                                aria-label="Añadir Concierto Sinfónico a mi plan para el finde">
+                                + Plan finde
+                            </button>
+                        </footer>
+                    </article>
+
+                    <!-- ==========================================
+                         TARJETA 2: Evento Comunitario (Por verificar)
+                         ========================================== -->
+                    <article class="evc-event-card card mb-3 shadow-sm border-0" aria-labelledby="event-title-2">
+                        <div class="card-body">
+                            <!-- Metadatos: Tipo de fuente y Fecha -->
+                            <header class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-warning text-dark evc-badge-community"
+                                    title="Sugerido por un usuario, pendiente de validación">Comunitario (Por
+                                    Verificar)</span>
+                                <time datetime="2026-03-21T09:00" class="small text-muted fw-bold evc-event-date">Sáb 21
+                                    Mar, 09:00</time>
+                            </header>
+
+                            <!-- Título y Descripción -->
+                            <h4 id="event-title-2" class="card-title h6 fw-bold evc-event-title">Mercado Artesanal
+                                Espontáneo</h4>
+                            <p class="card-text small text-muted evc-event-desc">Varios vecinos están armando pequeños
+                                puestos de artesanías y comida típica en la plaza sur.</p>
+
+                            <!-- Ubicación -->
+                            <address class="small text-muted mb-2 evc-event-location">
+                                📍 Plaza Sur
+                            </address>
+
+                            <!-- Etiquetas/Categorías -->
+                            <div class="evc-event-tags mb-3" aria-label="Categorías del evento" role="banner">
+                                <span class="badge bg-light text-dark border evc-tag">#Gastronomía</span>
+                            </div>
+                        </div>
+
+                        <!-- Pie de la tarjeta: Acciones de usuario -->
+                        <footer
+                            class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-sm btn-outline-primary evc-btn-locate"
+                                aria-label="Ver ubicación del Mercado Artesanal en el mapa">
+                                🗺️ Ver en mapa
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-success evc-btn-save-plan"
+                                aria-label="Añadir Mercado Artesanal a mi plan para el finde">
+                                + Plan finde
+                            </button>
+                        </footer>
+                    </article>
+
+                </div>
+            </section>
         </div>
     </main>
 
