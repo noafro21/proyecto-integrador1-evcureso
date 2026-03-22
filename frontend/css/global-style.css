@@ -1,0 +1,70 @@
+/* ==========================================
+   VARIABLES GLOBALES Y TEMA DE EVCURESO
+   ========================================== */
+:root {
+    /* Paleta de colores oficial */
+    --evc-primary-blue: #2A5C82;
+    --evc-accent-orange: #993B00; /** para cumplir con los estandares de accesibilidad se cambia el color naranja #FF8C42*/
+    --evc-accent-green: #2C6348; /* se sustituye por el verde de la marca  43B05C */
+    --evc-bg-light: #F4F7F6;
+    
+    /* Colores neutros y texto */
+    --evc-text-main: #333333;
+    --evc-text-muted: #6c757d;
+    --evc-border-color: #e0e0e0;
+}
+
+/* TIPOGRAFÍA BASE */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--evc-bg-light);
+    color: var(--evc-text-main);
+}
+
+h1, h2, h3, h4, h5, h6, 
+.evc-brand-name, 
+.evc-event-title,
+.evc-filter-title {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ACCESIBILIDAD ESTRICTA (A11y)*/
+/* Foco visible navegable por teclado para TODOS los elementos interactivos */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid var(--evc-accent-orange);
+    outline-offset: 3px;
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px rgba(255, 140, 66, 0.2);
+}
+
+/* BOTONES GENÉRICOS DE LA MARCA */
+.evc-btn-submit {
+    background-color: var(--evc-primary-blue);
+    color: #ffffff;
+    border: 2px solid var(--evc-primary-blue);
+    transition: all 0.2s ease-in-out;
+}
+
+.evc-btn-submit:hover {
+    background-color: #1e425e; /* Un tono más oscuro del azul */
+    border-color: #1e425e;
+    color: #ffffff;
+}
+
+.evc-btn-suggest {
+    background-color: var(--evc-accent-green);
+    color: #ffffff;
+    border: 2px solid var(--evc-accent-green);
+    transition: transform 0.2s ease;
+}
+
+.evc-btn-suggest:hover {
+    background-color: #358c49;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
