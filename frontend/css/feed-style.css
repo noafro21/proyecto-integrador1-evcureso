@@ -1,0 +1,89 @@
+/* ==========================================
+   FEED DE EVENTOS (TARJETAS)
+   ========================================== */
+
+/* Personalización de la barra de desplazamiento (Scrollbar) para la lista */
+.evc-feed-container::-webkit-scrollbar {
+    width: 6px;
+}
+.evc-feed-container::-webkit-scrollbar-track {
+    background: var(--evc-bg-light); 
+    border-radius: 4px;
+}
+.evc-feed-container::-webkit-scrollbar-thumb {
+    background: #cdd4d9; 
+    border-radius: 4px;
+}
+.evc-feed-container::-webkit-scrollbar-thumb:hover {
+    background: var(--evc-primary-blue); 
+}
+
+/* ==========================================
+   DISEÑO DE LAS TARJETAS (ARTICLE)
+   ========================================== */
+.evc-event-card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid var(--evc-border-color);
+}
+
+/* Efecto Hover: Eleva ligeramente la tarjeta */
+.evc-event-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(42, 92, 130, 0.12);
+}
+
+/* Imagen del evento (Mantiene la proporción sin deformarse) */
+.evc-event-image {
+    height: 160px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--evc-border-color);
+}
+
+/* Título del evento */
+.evc-event-title {
+    color: var(--evc-primary-blue);
+    margin-bottom: 0.5rem;
+}
+
+/* ==========================================
+   ETIQUETAS Y BADGES
+   ========================================== */
+
+/* Badges de fuente oficial/comunitaria */ 
+span.badge.evc-badge-official {
+    background-color: var(--evc-accent-green);
+    color: var(--evc-text-inverted); 
+    font-size: 0.7rem;
+    padding: 0.4em 0.6em;
+}
+
+span.badge.evc-badge-community {
+    background-color: #ffc107; 
+    color: #000000; 
+    font-weight: bold; 
+    font-size: 0.7rem;
+    padding: 0.4em 0.6em;
+}
+
+/* Etiquetas de categoría (Ej. #Cultura) */
+span.badge.evc-tag {
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: var(--evc-text-muted);
+    background-color: #f8f9fa;
+    border: 1px solid var(--evc-border-color);
+    transition: all 0.2s ease;
+}
+
+span.badge.evc-tag:hover {
+    color: var(--evc-primary-blue);
+    border-color: var(--evc-primary-blue);
+}
+
+/* Botones de acción en el pie de la tarjeta */
+.evc-btn-locate, .evc-btn-save-plan {
+    border-radius: 20px;
+    font-weight: 600;
+}
