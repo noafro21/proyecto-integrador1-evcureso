@@ -1,0 +1,71 @@
+/* ==========================================
+   PANTALLA DE ACCESO Y REGISTRO (login.html)
+   ========================================== */
+
+/* Ajuste del fondo general del main en auth */
+.evc-auth-container {
+    min-height: calc(100vh - 100px);
+    align-items: center;
+}
+
+/* Tarjeta principal */
+.evc-auth-card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(42, 92, 130, 0.1); /* Sombra con el tono azul de la marca */
+}
+
+/* ==========================================
+   PESTAÑAS DE NAVEGACIÓN (TABS BOOTSTRAP)
+   ========================================== */
+/* Usamos selectores específicos para evitar el uso de !important */
+ul.evc-auth-tabs.nav-tabs {
+    border-bottom: 2px solid var(--evc-border-color);
+}
+
+ul.evc-auth-tabs .evc-tab-btn {
+    border: none;
+    border-bottom: 3px solid transparent;
+    border-radius: 0;
+    color: var(--evc-text-muted);
+    background-color: transparent;
+    padding: 1rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+ul.evc-auth-tabs .evc-tab-btn:hover {
+    border-color: transparent;
+    color: var(--evc-primary-blue);
+}
+
+/* Estado Activo de la Pestaña */
+ul.evc-auth-tabs .evc-tab-btn.active {
+    color: var(--evc-primary-blue);
+    border-color: var(--evc-primary-blue);
+    background-color: transparent;
+}
+
+/* ==========================================
+   FORMULARIOS Y CONTROLES INTERNOS
+   ========================================== */
+.evc-form .evc-input {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--evc-border-color);
+    border-radius: 8px;
+}
+
+.evc-form .evc-link-forgot {
+    color: var(--evc-primary-blue);
+    transition: color 0.2s;
+}
+
+.evc-form .evc-link-forgot:hover {
+    color: var(--evc-accent-orange);
+    text-decoration: underline;
+}
+
+/* Switch del Promotor (Estilizado para coincidir con la marca) */
+.evc-switch-input:checked {
+    background-color: var(--evc-accent-green);
+    border-color: var(--evc-accent-green);
+}
