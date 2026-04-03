@@ -18,12 +18,17 @@
     <!-- Bootstrap 5 CSS (CDN), NORMALIZE -->
     <link rel="stylesheet" href="./css/normalize.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="./css/global-style.css">
+    <link rel="stylesheet" href="./css/header-style.css">
+    <link rel="stylesheet" href="./css/sidebar-style.css">
+    <link rel="stylesheet" href="./css/feed-style.css">
 </head>
 
 <body>
 
     <!-- HEADER & NAVEGACIÓN PRINCIPAL-->
-    <header class="evc-header text-white bg-dark">
+    <header class="evc-header text-white ">
         <!-- Usamos navbar de bootstrap como base, pero con nuestras clases semánticas -->
         <nav class="evc-nav navbar navbar-expand-lg navbar-dark container-fluid"
             aria-label="Navegación principal de Evcureso">
@@ -63,8 +68,7 @@
                     </li>
                     <!-- Botón de sugerir evento (Destacado) -->
                     <li class="nav-item ms-lg-3">
-                        <button class="btn evc-btn-suggest text-white fw-bold btn-success"
-                            aria-label="Sugerir un nuevo evento">
+                        <button class="btn evc-btn-suggest text-white fw-bold " aria-label="Sugerir un nuevo evento">
                             + Sugerir Evento
                         </button>
                     </li>
@@ -87,7 +91,7 @@
 
             <!-- BARRA LATERAL (Filtros) - Oculto en móviles por defecto, ocupa 3 columnas en desktop -->
             <aside class="evc-sidebar-filters col-12 col-md-3 mb-3" aria-label="Filtros de búsqueda y categorías">
-                <div class="card p-3 shadow-sm border-0">
+                <div class="card p-3 shadow-sm ">
 
                     <!-- Encabezado de los filtros -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -190,16 +194,15 @@
                     <!-- ==========================================
                          TARJETA 1: Evento Oficial 
                          ========================================== -->
-                    <article class="evc-event-card card mb-3 shadow-sm border-0" aria-labelledby="event-title-1">
+                    <article class="evc-event-card card mb-3 shadow-sm " aria-labelledby="event-title-1">
                         <!-- Imagen de cabecera pcional) -->
-                        <img src="https://via.placeholder.com/400x150?text=Concierto"
-                            class="card-img-top evc-event-image"
+                        <img src="../frontend/assets/images/aleste-concert.png" class="card-img-top evc-event-image"
                             alt="Fotografía del escenario del concierto al aire libre">
 
                         <div class="card-body">
                             <!-- Metadatos: Tipo de fuente y Fecha -->
                             <header class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge bg-success evc-badge-official"
+                                <span class="badge evc-badge-official"
                                     title="Publicado por un promotor verificado">Oficial</span>
                                 <!-- Etiqueta <time> con atributo datetime para máquinas -->
                                 <time datetime="2026-03-20T19:00" class="small text-muted fw-bold evc-event-date">Vie 20
@@ -210,18 +213,19 @@
                             <h4 id="event-title-1" class="card-title h6 fw-bold evc-event-title">Concierto Sinfónico al
                                 Aire Libre</h4>
                             <p class="card-text small text-muted evc-event-desc">Disfruta de una noche mágica con la
-                                orquesta sinfónica tocando clásicos en el parque principal. Evento para toda la familia.
+                                orquesta sinfónica tocando clásicos al aire libre en el Centro Comercial Aleste. Evento
+                                para toda la familia.
                             </p>
 
                             <!-- Ubicación -->
                             <address class="small text-muted mb-2 evc-event-location">
-                                📍 Parque Central de Copalchi
+                                📍 Centro Comercial Aleste
                             </address>
 
                             <!-- Etiquetas/Categorías -->
                             <div class="evc-event-tags mb-3" aria-label="Categorías del evento" role="banner">
-                                <span class="badge bg-light text-dark border evc-tag">#Cultura</span>
-                                <span class="badge bg-light text-dark border evc-tag">#AireLibre</span>
+                                <span class="badge evc-tag text-white bg-dark">#Cultura</span>
+                                <span class="badge evc-tag text-white bg-dark">#AireLibre</span>
                             </div>
                         </div>
 
@@ -240,13 +244,68 @@
                     </article>
 
                     <!-- ==========================================
-                         TARJETA 2: Evento Comunitario (Por verificar)
+                         TARJETA 2: Evento Oficial 
                          ========================================== -->
-                    <article class="evc-event-card card mb-3 shadow-sm border-0" aria-labelledby="event-title-2">
+                    <article class="evc-event-card card mb-3 shadow-sm " aria-labelledby="event-title-2">
+                        <!-- Imagen de cabecera pcional) -->
+                        <img src="../frontend/assets/images/aleste-concert.png" class="card-img-top evc-event-image"
+                            alt="Fotografía del escenario del concierto al aire libre">
+
                         <div class="card-body">
                             <!-- Metadatos: Tipo de fuente y Fecha -->
                             <header class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge bg-warning text-dark evc-badge-community"
+                                <span class="badge evc-badge-official"
+                                    title="Publicado por un promotor verificado">Oficial</span>
+                                <!-- Etiqueta <time> con atributo datetime para máquinas -->
+                                <time datetime="2026-03-20T19:00" class="small text-muted fw-bold evc-event-date">Vie 20
+                                    Mar, 19:00</time>
+                            </header>
+
+                            <!-- Título y Descripción -->
+                            <h4 id="event-title-1" class="card-title h6 fw-bold evc-event-title">Concierto Sinfónico al
+                                Aire Libre</h4>
+                            <p class="card-text small text-muted evc-event-desc">Disfruta de una noche mágica con la
+                                orquesta sinfónica tocando clásicos al aire libre en el Centro Comercial Aleste. Evento
+                                para toda la familia.
+                            </p>
+
+                            <!-- Ubicación -->
+                            <address class="small text-muted mb-2 evc-event-location">
+                                📍 Centro Comercial Aleste
+                            </address>
+
+                            <!-- Etiquetas/Categorías -->
+                            <div class="evc-event-tags mb-3" aria-label="Categorías del evento" role="banner">
+                                <span class="badge evc-tag text-white bg-dark">#Cultura</span>
+                                <span class="badge evc-tag text-white bg-dark">#AireLibre</span>
+                            </div>
+                        </div>
+
+                        <!-- Pie de la tarjeta: Acciones de usuario -->
+                        <footer
+                            class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-sm btn-outline-primary evc-btn-locate"
+                                aria-label="Ver ubicación del Concierto Sinfónico en el mapa">
+                                🗺️ Ver en mapa
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-success evc-btn-save-plan"
+                                aria-label="Añadir Concierto Sinfónico a mi plan para el finde">
+                                + Plan finde
+                            </button>
+                        </footer>
+                    </article>
+
+
+                    <!-- ==========================================
+                         TARJETA 3: Evento Comunitario (Por verificar)
+                         ========================================== -->
+                    <article class="evc-event-card card mb-3 shadow-sm" aria-labelledby="event-title-3">
+                        <img src="../frontend/assets/images/artisan-market.png" class="card-img-top evc-event-image"
+                            alt="Fotografía del mercado artesanal con puestos de artesanías y comida típica en el Parque Central de Desamparados">
+                        <div class="card-body">
+                            <!-- Metadatos: Tipo de fuente y Fecha -->
+                            <header class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge evc-badge-community"
                                     title="Sugerido por un usuario, pendiente de validación">Comunitario (Por
                                     Verificar)</span>
                                 <time datetime="2026-03-21T09:00" class="small text-muted fw-bold evc-event-date">Sáb 21
@@ -256,17 +315,20 @@
                             <!-- Título y Descripción -->
                             <h4 id="event-title-2" class="card-title h6 fw-bold evc-event-title">Mercado Artesanal
                                 Espontáneo</h4>
-                            <p class="card-text small text-muted evc-event-desc">Varios vecinos están armando pequeños
-                                puestos de artesanías y comida típica en la plaza sur.</p>
+                            <p class="card-text small text-muted evc-event-desc">Varios emprendedores estrán armando
+                                pequeños
+                                puestos de artesanías y comida típica en los espacios públicos del Parque Central de
+                                Desamparados.</p>
 
                             <!-- Ubicación -->
                             <address class="small text-muted mb-2 evc-event-location">
-                                📍 Plaza Sur
+                                📍 Parque Central de Desamparados
                             </address>
 
                             <!-- Etiquetas/Categorías -->
                             <div class="evc-event-tags mb-3" aria-label="Categorías del evento" role="banner">
-                                <span class="badge bg-light text-dark border evc-tag">#Gastronomía</span>
+                                <span class="badge text-white bg-dark evc-tag">#Gastronomía</span>
+                                <span class="badge evc-tag text-white bg-dark">#AireLibre</span>
                             </div>
                         </div>
 
