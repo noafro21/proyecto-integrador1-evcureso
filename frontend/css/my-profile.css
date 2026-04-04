@@ -1,0 +1,54 @@
+/* ==========================================
+   ESTILOS DE LA PANTALLA DE PERFIL
+   ========================================== */
+
+/* Avatar de usuario simulado (Placeholder) */
+.evc-avatar-placeholder {
+    width: 64px;
+    height: 64px;
+    background-color: var(--evc-primary-blue);
+    border-radius: 50%;
+    /* Sombra suave naranja para dar relieve a la identidad */
+    box-shadow: 0 4px 10px rgba(255, 140, 66, 0.3);
+}
+
+.letter-spacing {
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================
+   PESTAÑAS DE NAVEGACIÓN (TABS)
+   ========================================== */
+ul.evc-profile-tabs {
+    border-bottom: 2px solid var(--evc-border-color);
+}
+
+ul.evc-profile-tabs .evc-tab-btn {
+    color: var(--evc-text-muted);
+    border: none;
+    border-bottom: 3px solid transparent;
+    border-radius: 0;
+    padding: 1rem 1.5rem;
+    transition: all 0.2s ease;
+}
+
+ul.evc-profile-tabs .evc-tab-btn:hover {
+    color: var(--evc-primary-blue);
+    border-bottom-color: rgba(42, 92, 130, 0.3);
+}
+
+ul.evc-profile-tabs .evc-tab-btn.active {
+    color: var(--evc-primary-blue);
+    background: transparent;
+    border-bottom: 3px solid var(--evc-accent-orange);
+}
+
+/* Tablas internas del perfil */
+.table-responsive .table {
+    color: var(--evc-text-main);
+}
+
+.table-responsive th {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--evc-text-muted);
+}
