@@ -30,23 +30,8 @@
 
 <body class="bg-light">
 
-    <!-- ==========================================
-         HEADER MINIMALISTA (Solo Logo y Regresar)
-         ========================================== -->
-    <header class="evc-header text-white shadow-sm">
-        <nav class="evc-nav navbar navbar-dark container" aria-label="Navegación de autenticación">
-            <a class="navbar-brand d-flex align-items-center" href="index.html"
-                aria-label="Volver a la página de inicio">
-                <img src="assets/images/logo-1.png" alt="Logo de Evcureso" width="100" height="40" class="me-2"
-                    onerror="this.src='https://via.placeholder.com/40x40?text=E'">
-            </a>
-            <div class="d-flex">
-                <a href="index.html" class="btn btn-outline-light btn-sm evc-btn-back" aria-label="Regresar a Explorar">
-                    ← Volver a Explorar
-                </a>
-            </div>
-        </nav>
-    </header>
+    <!-- HEADER & NAVEGACIÓN PRINCIPAL-->
+    <header class="evc-header text-white shadow-sm" id="navbar-container"></header>
 
     <!-- ==========================================
          CONTENEDOR PRINCIPAL DE AUTENTICACIÓN
@@ -193,6 +178,8 @@
 
     <!-- Bootstrap 5 JS Bundle (CDN) para el funcionamiento de las pestañas (Tabs) y Acordeón -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script para cargar la barra de navegación -->
+    <script src="./js/load-navbar.js"></script>
 </body>
 
 </html>
