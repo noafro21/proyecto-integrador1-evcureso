@@ -46,14 +46,14 @@ const eventSchema = new mongoose.Schema(
     // RF-08: Diferenciación entre fuente oficial y comunitaria
     sourceType: {
       type: String,
-      enum: ["Official", "Community"],
+      enum: ["Oficial", "Comunitaria"],
       required: true,
     },
     // RF-10: Sugerencias inician en "Por Verificar"
     status: {
       type: String,
-      enum: ["Active", "PendingVerification", "Cancelled"],
-      default: "Active",
+      enum: ["Activo", "Pendiente de Verificación", "Cancelado"],
+      default: "Activo",
     },
     creator: {
       type: mongoose.Schema.Types.ObjectId,
