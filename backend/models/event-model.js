@@ -61,8 +61,8 @@ const eventSchema = new mongoose.Schema(
       required: true,
     },
     imageUrl: {
-      type: String,
-      default: null,
+      type: String, // Texto porque guardaremos el enlace (URL) de la imagen
+      required: false, // Ponlo en false si no todas las personas subirán imagen
     },
   },
   {
