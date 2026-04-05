@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const Event = require("../models/event-model"); // Importar el modelo de evento
-const User = require("../models/user-model"); // Importamos al usuario para verificar roles
+const User = require("../models/user-model"); // AGREGADO: Importar el modelo de usuario para verificar roles
 
 // ==========================================
 // POST: Crear un nuevo evento
 // ==========================================
 router.post("/crear", async (req, res) => {
+  // AGREGADO: Extraemos imageUrl del cuerpo de la petición
   const {
     title,
     description,
@@ -15,6 +16,7 @@ router.post("/crear", async (req, res) => {
     categories,
     sourceType,
     creator,
+    imageUrl,
   } = req.body;
 
   // Validación básica de campos obligatorios
@@ -26,22 +28,25 @@ router.post("/crear", async (req, res) => {
     !sourceType ||
     !creator
   ) {
-    return res.status(400).json({
-      mensajeError: "Faltan campos obligatorios para crear el evento.",
-    });
+    return res
+      .status(400)
+      .json({
+        mensajeError: "Faltan campos obligatorios para crear el evento.",
+      });
   }
 
   // Validar el formato GeoJSON de la ubicación
   if (!location.coordinates || !location.addressName) {
-    return res.status(400).json({
-      mensajeError:
-        "La ubicación debe incluir coordenadas [longitud, latitud] y el nombre del lugar.",
-    });
+    return res
+      .status(400)
+      .json({
+        mensajeError:
+          "La ubicación debe incluir coordenadas [longitud, latitud] y el nombre del lugar.",
+      });
   }
 
   try {
-    // Determinar el estado inicial según el tipo de fuente (RF-08 y RF-10)
-    // Oficiales nacen activos, Comunitarios nacen pendientes de validación
+    // Determinar el estado inicial según el tipo de fuente en ESPAÑOL
     const status =
       sourceType === "Oficial" ? "Activo" : "Pendiente de Verificación";
 
@@ -58,6 +63,7 @@ router.post("/crear", async (req, res) => {
       sourceType,
       status,
       creator,
+      imageUrl, // AGREGADO: Pasamos la URL de la imagen al modelo
     });
 
     await nuevoEvento.save();
@@ -81,7 +87,8 @@ Ejemplo para probar en Postman (POST http://localhost:3000/eventos/crear):
   },
   "categories": ["#Cultura", "#Música"],
   "sourceType": "Oficial",
-  "creator": "COLOCA_AQUI_UN_ID_DE_USUARIO_VALIDO" 
+  "creator": "COLOCA_AQUI_UN_ID_DE_USUARIO_VALIDO",
+  "imageUrl": "https://ejemplo.com/imagen.jpg"
 }
 */
 
@@ -163,10 +170,10 @@ router.get("/cercanos", async (req, res) => {
   }
 
   try {
-    // MongoDB hace los cálculos geoespaciales en METROS, así que multiplicamos por 1000
+    // MongoDB hace los cálculos geoespaciales en METROS
     const distanciaEnMetros = parseFloat(km) * 1000;
 
-    // Buscar eventos activos que estén dentro del radio especificado
+    // Buscar eventos ACTIVOS que estén dentro del radio especificado
     const eventosCercanos = await Event.find({
       location: {
         $near: {
@@ -179,7 +186,7 @@ router.get("/cercanos", async (req, res) => {
         },
       },
       status: "Activo",
-    }).populate("creator", "fullName");
+    }).populate("creator", "fullName email role");
 
     res.json(eventosCercanos);
   } catch (error) {
@@ -188,7 +195,7 @@ router.get("/cercanos", async (req, res) => {
 });
 
 /*
-Ejemplo para Postman: (Buscando a 5km de esas coordenadas)
+Ejemplo para Postman (Buscando a 5km de San José):
 GET http://localhost:3000/eventos/cercanos?lat=9.9333&lng=-84.0833&km=5
 */
 
@@ -199,9 +206,11 @@ router.put("/aprobar-comunitario", async (req, res) => {
   const { eventoId, moderadorId } = req.body;
 
   if (!eventoId || !moderadorId) {
-    return res.status(400).json({
-      mensajeError: "El ID del evento y del moderador son obligatorios.",
-    });
+    return res
+      .status(400)
+      .json({
+        mensajeError: "El ID del evento y del moderador son obligatorios.",
+      });
   }
 
   try {
@@ -214,10 +223,12 @@ router.put("/aprobar-comunitario", async (req, res) => {
         .json({ mensajeError: "Usuario moderador no encontrado." });
     }
     if (moderador.role !== "Moderador") {
-      return res.status(403).json({
-        mensajeError:
-          "Acceso denegado. Solo los Moderadores pueden aprobar eventos.",
-      });
+      return res
+        .status(403)
+        .json({
+          mensajeError:
+            "Acceso denegado. Solo los Moderadores pueden aprobar eventos.",
+        });
     }
 
     // 2. Buscar el evento que se quiere aprobar
@@ -228,9 +239,11 @@ router.put("/aprobar-comunitario", async (req, res) => {
 
     // 3. Validar que el evento realmente esté esperando aprobación
     if (evento.status !== "Pendiente de Verificación") {
-      return res.status(400).json({
-        mensajeError: "Este evento no está pendiente de verificación.",
-      });
+      return res
+        .status(400)
+        .json({
+          mensajeError: "Este evento no está pendiente de verificación.",
+        });
     }
 
     // 4. Cambiar el estado a Activo
@@ -238,8 +251,7 @@ router.put("/aprobar-comunitario", async (req, res) => {
     await evento.save();
 
     res.status(200).json({
-      mensaje:
-        "¡Evento comunitario aprobado! Ahora es visible para todos los exploradores.",
+      mensaje: "¡Evento comunitario aprobado! Ahora es visible para todos.",
       evento,
     });
   } catch (error) {
@@ -255,4 +267,5 @@ PUT http://localhost:3000/eventos/aprobar-comunitario
   "moderadorId": "ID_DEL_USUARIO_MODERADOR"
 }
 */
+
 module.exports = router;
