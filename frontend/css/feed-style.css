@@ -54,11 +54,14 @@
 /* Badges de fuente oficial/comunitaria */ 
 span.badge.evc-badge-official {
     background-color: var(--evc-accent-green);
-    color: var(--evc-text-inverted); 
+    color: #ffffff; 
     font-size: 0.7rem;
     padding: 0.4em 0.6em;
 }
 
+/* CORRECCIÓN A11Y: Aumentamos la especificidad encadenando clases 
+   (span.badge.evc-badge-community) para ganarle a Bootstrap sin usar !important.
+   Esto fuerza el texto a negro puro (#000000) sobre el amarillo, pasando el WCAG AAA. */
 span.badge.evc-badge-community {
     background-color: #ffc107; 
     color: #000000; 
@@ -67,19 +70,22 @@ span.badge.evc-badge-community {
     padding: 0.4em 0.6em;
 }
 
+/* ==========================================
+   CORRECCIÓN VISUAL DE CATEGORÍAS (A11Y)
+   ========================================== */
 /* Etiquetas de categoría (Ej. #Cultura) */
 span.badge.evc-tag {
     font-weight: 600;
     font-size: 0.75rem;
-    color: var(--evc-text-muted);
-    background-color: #f8f9fa;
-    border: 1px solid var(--evc-border-color);
+    color: var(--evc-primary-blue); /* Texto azul oscuro para contraste fuerte */
+    background-color: #eef2f5; /* Fondo celeste/gris muy clarito */
+    border: 1px solid rgba(42, 92, 130, 0.2); /* Borde sutil azul */
     transition: all 0.2s ease;
 }
 
 span.badge.evc-tag:hover {
-    color: var(--evc-primary-blue);
-    border-color: var(--evc-primary-blue);
+    background-color: var(--evc-primary-blue);
+    color: #ffffff;
 }
 
 /* Botones de acción en el pie de la tarjeta */
