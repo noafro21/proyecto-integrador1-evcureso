@@ -4,6 +4,10 @@
 .evc-header {
     background-color: var(--evc-primary-blue);
     border-bottom: 4px solid var(--evc-accent-orange);
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+    
 }
 
 /* Ajuste del nombre de la marca */
