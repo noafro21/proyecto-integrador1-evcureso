@@ -198,4 +198,55 @@ PUT http://localhost:3000/usuarios/agregar-plan
 }
 */
 
+// ==========================================
+// GET: Obtener "Mi Plan para el Finde" de un usuario
+// ==========================================
+router.get("/:id/eventos-guardados", async (req, res) => {
+  try {
+    const usuarioId = req.params.id;
+
+    // Buscamos al usuario y usamos .populate() para traer los datos completos del evento (título, fecha, imagen)
+    const usuario = await User.findById(usuarioId).populate("savedEvents");
+
+    if (!usuario) {
+      return res.status(404).json({ mensajeError: "Usuario no encontrado" });
+    }
+
+    // Enviamos el arreglo de eventos ya "poblado" (con toda la info)
+    res.status(200).json(usuario.savedEvents);
+  } catch (error) {
+    res.status(500).json({ mensajeError: error.message });
+  }
+});
+
+// ==========================================
+// PUT: Quitar un evento de "Mi Plan para el Finde" (NUEVO)
+// ==========================================
+router.put("/quitar-plan", async (req, res) => {
+  const { email, eventoId } = req.body;
+
+  if (!email || !eventoId) {
+    return res
+      .status(400)
+      .json({ mensajeError: "El correo y el ID del evento son obligatorios" });
+  }
+
+  try {
+    const usuario = await User.findOne({ email: email.toLowerCase() });
+    if (!usuario) {
+      return res.status(404).json({ mensajeError: "Usuario no encontrado." });
+    }
+
+    // Filtramos el arreglo dejando todos los eventos MENOS el que queremos borrar
+    usuario.savedEvents = usuario.savedEvents.filter(
+      (id) => id.toString() !== eventoId,
+    );
+    await usuario.save();
+
+    res.status(200).json({ mensaje: "Evento removido de tu plan.", usuario });
+  } catch (error) {
+    res.status(400).json({ mensajeError: error.message });
+  }
+});
+
 module.exports = router;
