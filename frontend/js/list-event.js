@@ -107,8 +107,62 @@ function renderEvents(events) {
   });
 }
 
-function saveToPlan(eventId) {
-  alert(`Pronto podrás guardar el evento ID: ${eventId} en tu plan.`);
+// ==========================================
+// FUNCION: Guardar evento en el perfil (Plan Finde)
+// ==========================================
+async function saveToPlan(eventId) {
+  const storedUser = localStorage.getItem("currentUser");
+
+  // 1. Validar que el usuario haya iniciado sesión
+  if (!storedUser) {
+    Swal.fire({
+      icon: "warning",
+      title: "¡Ups!",
+      text: "Debes iniciar sesión para guardar eventos en tu Plan del Finde.",
+      confirmButtonText: "Ir al Login",
+    }).then((result) => {
+      if (result.isConfirmed) window.location.href = "user-login.html";
+    });
+    return;
+  }
+
+  const currentUser = JSON.parse(storedUser);
+
+  // 2. Enviar petición a TU ruta en el Backend (/agregar-plan)
+  try {
+    const response = await fetch(
+      `http://localhost:3000/usuarios/agregar-plan`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: currentUser.email, // Usamos el email como lo pide tu backend
+          eventoId: eventId,
+        }),
+      },
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      Swal.fire({
+        icon: "success",
+        title: "¡Guardado!",
+        text: "El evento se añadió a tu Plan del Finde.",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    } else {
+      Swal.fire({ icon: "info", title: "Atención", text: data.mensajeError });
+    }
+  } catch (error) {
+    console.error("Error al guardar evento:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "No pudimos conectar con el servidor.",
+    });
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
