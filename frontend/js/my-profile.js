@@ -42,7 +42,7 @@ function loadUserProfile() {
         "Promotor Oficial. Publica y gestiona eventos para la comunidad.";
     } else if (currentUser.role === "Moderador") {
       profileRoleDesc.innerText =
-        "Moderador del Sistema. Mantén la calidad de los eventos de Copalchi.";
+        "Mantén la calidad de los eventos de Evcureso.";
     }
   }
 
@@ -194,7 +194,7 @@ function loadUserSuggestionsPlaceholder(role) {
     suggestionsContainer.innerHTML = `
             <tr>
                 <td colspan="4" class="text-center py-4 text-muted">
-                    Aún no has sugerido ningún evento. ¡Anímate a compartir lo que pasa en Copalchi!
+                    Aún no has sugerido ningún evento. ¡Anímate eventos locales de tu comunidad!
                 </td>
             </tr>
         `;
