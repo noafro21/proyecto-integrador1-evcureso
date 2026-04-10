@@ -61,6 +61,7 @@ window.updateNavbarState = function () {
       roleButtons += `<a href="./event-register.html" class="btn btn-success btn-sm fw-bold me-2">Publicar Oficial</a>`;
     } else if (currentUser.role === "Moderador") {
       roleButtons += `<a href="./event-register.html" class="btn btn-success btn-sm fw-bold me-2">Publicar Evento</a>`;
+      roleButtons += `<a href="panel-moderator.html" class="btn btn-warning btn-sm fw-bold me-2 text-dark">🛡️ Panel Moderador</a>`;
     } else {
       roleButtons += `<a href="./event-register.html" class="btn evc-btn-suggest text-white btn-sm fw-bold me-2">+ Sugerir Evento</a>`;
     }
