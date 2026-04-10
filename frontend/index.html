@@ -80,10 +80,10 @@
                         <div class="mb-4 evc-filter-group">
                             <label for="dateFilter" class="form-label h6 fw-bold evc-filter-title fs-6">¿Cuándo?</label>
                             <select class="form-select evc-select-input text-muted" id="dateFilter">
-                                <option value="cualquiera">Cualquier fecha</option>
+                                <option value="cualquiera" selected>Cualquier fecha</option>
                                 <option value="hoy">Hoy</option>
                                 <option value="manana">Mañana</option>
-                                <option value="fin-semana" selected>Este fin de semana</option>
+                                <option value="fin-semana">Este fin de semana</option>
                             </select>
                         </div>
 
@@ -94,7 +94,7 @@
 
                             <div class="form-check evc-checkbox-wrapper mb-2">
                                 <input class="form-check-input evc-checkbox-input" type="checkbox" id="catAireLibre"
-                                    value="aire-libre">
+                                    value="aire_libre">
                                 <label class="form-check-label evc-checkbox-label text-muted"
                                     for="catAireLibre">#AireLibre</label>
                             </div>
@@ -115,6 +115,12 @@
                                     value="ecoturismo">
                                 <label class="form-check-label evc-checkbox-label text-muted"
                                     for="catEcoturismo">#Ecoturismo</label>
+                            </div>
+                            <div class="form-check evc-checkbox-wrapper mb-2">
+                                <input class="form-check-input evc-checkbox-input" type="checkbox" id="catMusica"
+                                    value="musica">
+                                <label class="form-check-label evc-checkbox-label text-muted"
+                                    for="catMusica">#Música</label>
                             </div>
                         </fieldset>
                     </form>
