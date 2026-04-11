@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 const Event = require("../models/event-model"); // Importar el modelo de evento
 const User = require("../models/user-model"); // AGREGADO: Importar el modelo de usuario para verificar roles
 
@@ -28,21 +29,17 @@ router.post("/crear", async (req, res) => {
     !sourceType ||
     !creator
   ) {
-    return res
-      .status(400)
-      .json({
-        mensajeError: "Faltan campos obligatorios para crear el evento.",
-      });
+    return res.status(400).json({
+      mensajeError: "Faltan campos obligatorios para crear el evento.",
+    });
   }
 
   // Validar el formato GeoJSON de la ubicación
   if (!location.coordinates || !location.addressName) {
-    return res
-      .status(400)
-      .json({
-        mensajeError:
-          "La ubicación debe incluir coordenadas [longitud, latitud] y el nombre del lugar.",
-      });
+    return res.status(400).json({
+      mensajeError:
+        "La ubicación debe incluir coordenadas [longitud, latitud] y el nombre del lugar.",
+    });
   }
 
   try {
@@ -97,6 +94,12 @@ Ejemplo para probar en Postman (POST http://localhost:3000/eventos/crear):
 // ==========================================
 router.get("/", async (req, res) => {
   try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({
+        mensajeError: "La base de datos todavía no está lista.",
+      });
+    }
+
     // Solo mostramos los eventos que están activos y aprobados
     const eventos = await Event.find({ status: "Activo" })
       // Utilizamos populate para cruzar datos, trayendo el nombre y correo de quien lo creó
@@ -112,6 +115,21 @@ router.get("/", async (req, res) => {
 Ejemplo para probar en Postman:
 GET http://localhost:3000/eventos
 */
+
+// ==========================================
+// GET: Obtener eventos pendientes de verificación
+// (DEBE IR AQUÍ, ANTES DEL /:id)
+// ==========================================
+router.get("/pendientes", async (req, res) => {
+  try {
+    const eventos = await Event.find({
+      status: "Pendiente de Verificación",
+    }).populate("creator", "fullName");
+    res.json(eventos);
+  } catch (error) {
+    res.status(500).json({ mensajeError: error.message });
+  }
+});
 
 // ==========================================
 // PUT: Cancelar un evento (Validación RF-06)
@@ -206,11 +224,9 @@ router.put("/aprobar-comunitario", async (req, res) => {
   const { eventoId, moderadorId } = req.body;
 
   if (!eventoId || !moderadorId) {
-    return res
-      .status(400)
-      .json({
-        mensajeError: "El ID del evento y del moderador son obligatorios.",
-      });
+    return res.status(400).json({
+      mensajeError: "El ID del evento y del moderador son obligatorios.",
+    });
   }
 
   try {
@@ -223,12 +239,10 @@ router.put("/aprobar-comunitario", async (req, res) => {
         .json({ mensajeError: "Usuario moderador no encontrado." });
     }
     if (moderador.role !== "Moderador") {
-      return res
-        .status(403)
-        .json({
-          mensajeError:
-            "Acceso denegado. Solo los Moderadores pueden aprobar eventos.",
-        });
+      return res.status(403).json({
+        mensajeError:
+          "Acceso denegado. Solo los Moderadores pueden aprobar eventos.",
+      });
     }
 
     // 2. Buscar el evento que se quiere aprobar
@@ -239,11 +253,9 @@ router.put("/aprobar-comunitario", async (req, res) => {
 
     // 3. Validar que el evento realmente esté esperando aprobación
     if (evento.status !== "Pendiente de Verificación") {
-      return res
-        .status(400)
-        .json({
-          mensajeError: "Este evento no está pendiente de verificación.",
-        });
+      return res.status(400).json({
+        mensajeError: "Este evento no está pendiente de verificación.",
+      });
     }
 
     // 4. Cambiar el estado a Activo
