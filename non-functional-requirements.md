@@ -4,8 +4,6 @@
 
 ## 1. Desempeño y Escalabilidad
 
-**RNF-01:** El tiempo de respuesta para las consultas geoespaciales (carga de pines en el mapa según el radio seleccionado) no debe exceder los 1.5 segundos.
-
 **RNF-02:** El sistema debe ser capaz de renderizar hasta 5,000 eventos activos en el mapa sin degradación del rendimiento en el cliente (navegador).
 
 ## 2. Seguridad y Autenticación
@@ -26,7 +24,7 @@
 
 **RNF-06:** La aplicación debe seguir un diseño Mobile-First utilizando Bootstrap 5, garantizando que sea completamente funcional en dispositivos móviles y de escritorio.
 
-**RNF-07:** La interfaz debe utilizar la paleta de colores oficial establecida (#2A5C82, #FF8C42, #43B05C, #F4F7F6) para mantener la identidad visual y la jerarquía de información.
+**RNF-07:** La interfaz debe utilizar la paleta de colores oficial establecida ( #2A5C82, #FF8C42, #43B05C, #F4F7F6) para mantener la identidad visual y la jerarquía de información.
 
 **RNF-08:** Se deberá utilizar fuentes de Google: Montserrat para títulos y Open Sans para cuerpos de texto.
 
@@ -37,8 +35,6 @@
 **RNF-10 :** El backend debe estar estructurado siguiendo el patrón de arquitectura MVC (Modelo-Vista-Controlador) para asegurar el cumplimiento de la separación de responsabilidades.
 
 ## 5. Estándares Técnicos
-
-**RNF-11:** Los datos geográficos deben almacenarse y transmitirse siguiendo estrictamente el estándar GeoJSON.
 
 **RNF-12:** El código fuente (nombres de variables, funciones y rutas) se escribirá en Inglés, mientras que los comentarios y la interfaz de usuario final estarán en Español.
 

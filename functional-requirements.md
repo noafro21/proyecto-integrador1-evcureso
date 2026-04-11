@@ -22,16 +22,12 @@
 
 ## 3. Exploración y Usuario (Geolocalización)
 
-**RF-08:** El sistema debe mostrar un mapa interactivo (Leaflet) con pines representativos de los eventos activos, diferenciando visualmente los oficiales de los comunitarios.
+**RF-08:** Los usuarios deben poder sugerir eventos enviando una foto (vía URL o archivo). Estos se guardarán con el estado inicial "Por Verificar".
 
-**RF-09:** El usuario debe poder definir un radio de interés (5km, 10km, 20km) mediante un selector; el mapa actualizará los pines automáticamente según esta preferencia.
-
-**RF-10:** Los usuarios deben poder sugerir eventos enviando una foto (vía URL o archivo) y ubicación. Estos se guardarán con el estado inicial "Por Verificar".
-
-**RF-11:** El sistema debe permitir guardar eventos en una lista personalizada denominada "Plan para el finde".
+**RF-09:** El sistema debe permitir guardar eventos en una lista personalizada denominada "Plan para el finde".
 
 ## 4. Moderación y Calidad de Datos
 
-**RF-12:** El moderador debe tener una herramienta de "Fusión" para unir eventos detectados como duplicados, manteniendo la información más completa de ambos registros.
+**RF-10:** El moderador debe tener una herramienta de "Fusión" para unir eventos detectados como duplicados, manteniendo la información más completa de ambos registros.
 
-**RF-13:** El moderador debe poder asignar etiquetas de categoría (#AireLibre, #Cultura, etc.) a eventos comunitarios antes de su publicación masiva en el mapa.
+**RF-11:** El moderador debe poder asignar etiquetas de categoría (#AireLibre, #Cultura, etc.) a eventos comunitarios antes de su publicación masiva en el mapa.
