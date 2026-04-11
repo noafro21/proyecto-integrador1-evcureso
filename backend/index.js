@@ -3,7 +3,8 @@ const express = require("express"); // Facilita la creación de servidores y man
 const mongoose = require("mongoose"); // Permite conectarse a la BD de mongoDB
 const cors = require("cors"); // Permite la comunicación entre dominios diferentes
 const bodyParser = require("body-parser"); // Permite interpretar los datos en formato JSON
-require("dotenv").config(); // Se importa el archivo .env para poder utilizar sus variables
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") }); // Se importa el archivo .env para poder utilizar sus variables
 
 const app = express(); // Crear una instancia de express
 const PORT = process.env.PORT || 3000; // Usar el puerto indicado en .env o el 3000
@@ -21,14 +22,6 @@ app.use(cors());
 // Fix para el error querySrv ECONNREFUSED en MongoDB Atlas
 require("node:dns/promises").setServers(["1.1.1.1", "8.8.8.8"]);
 
-// Conexión a la Base de Datos
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => console.log("✅ MongoDB Atlas conectado para Evcureso"))
-  .catch((error) =>
-    console.log("❌ Ocurrió un error al conectarse con MongoDB: ", error),
-  );
-
 // Rutas de Evcureso (Descomentaremos cuando existan)
 app.use("/usuarios", userRoute);
 app.use("/eventos", eventRoute);
@@ -38,7 +31,26 @@ app.get("/", (req, res) => {
   res.send("Servidor de Evcureso en funcionamiento");
 });
 
-// Levantar servidor
-app.listen(PORT, () => {
-  console.log("🚀 Servidor corriendo en http://localhost:" + PORT);
-});
+async function startServer() {
+  try {
+    if (process.env.MONGODB_URI) {
+      await mongoose.connect(process.env.MONGODB_URI);
+      console.log("✅ MongoDB Atlas conectado para Evcureso");
+    } else {
+      console.log(
+        "⚠️ MONGODB_URI no está definida; el servidor arrancó sin base de datos.",
+      );
+    }
+
+    app.listen(PORT, () => {
+      console.log("🚀 Servidor corriendo en http://localhost:" + PORT);
+    });
+  } catch (error) {
+    console.log("❌ Ocurrió un error al conectarse con MongoDB: ", error);
+    app.listen(PORT, () => {
+      console.log("🚀 Servidor corriendo en http://localhost:" + PORT);
+    });
+  }
+}
+
+startServer();
