@@ -199,11 +199,11 @@ window.saveToPlan = async function (eventId) {
         text: "Debes iniciar sesión para guardar eventos.",
         confirmButtonText: "Ir al Login",
       }).then((result) => {
-        if (result.isConfirmed) window.location.href = "login.html";
+        if (result.isConfirmed) window.location.href = "user-login.html";
       });
     } else {
       alert("Debes iniciar sesión para guardar eventos.");
-      window.location.href = "login.html";
+      window.location.href = "user-login.html";
     }
     return;
   }
