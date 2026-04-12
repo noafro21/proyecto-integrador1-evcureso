@@ -257,6 +257,33 @@ router.put("/:id/aprobar", async (req, res) => {
 });
 
 // ==========================================
+// PUT: Sancionar Promotor a Explorador (Sanción)
+// ==========================================
+router.put("/:id/sancionar", async (req, res) => {
+  try {
+    const usuarioId = req.params.id;
+    const usuario = await User.findById(usuarioId);
+
+    if (!usuario) {
+      return res.status(404).json({ mensajeError: "Usuario no encontrado" });
+    }
+
+    // Le quitamos el rol de Promotor y lo regresamos a Explorador
+    usuario.role = "Explorador";
+    usuario.status = "Activo";
+    await usuario.save();
+
+    res.status(200).json({
+      mensaje:
+        "El usuario ha sido sancionado y degradado a Explorador exitosamente.",
+      usuario,
+    });
+  } catch (error) {
+    res.status(500).json({ mensajeError: error.message });
+  }
+});
+
+// ==========================================
 // GET: Obtener "Mi Plan para el Finde" de un usuario
 // ==========================================
 router.get("/:id/eventos-guardados", async (req, res) => {
