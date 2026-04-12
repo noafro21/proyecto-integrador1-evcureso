@@ -27,7 +27,7 @@
         <div class="row mb-4 align-items-center">
             <div class="col-md-8">
                 <h1 class="h2 fw-bold text-dark">Panel de Moderación</h1>
-                <p class="text-muted">Centro de control para aprobar Promotores y Eventos Comunitarios.</p>
+                <p class="text-muted">Centro de control del sistema.</p>
             </div>
             <div class="col-md-4 text-md-end">
                 <span class="badge bg-danger fs-6 px-3 py-2 shadow-sm">🛡️ Acceso Restringido</span>
@@ -37,39 +37,43 @@
         <ul class="nav nav-tabs mb-4" id="moderatorTabs" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active fw-bold text-dark" id="users-tab" data-bs-toggle="tab"
-                    data-bs-target="#users-pane" type="button" role="tab" aria-controls="users-pane"
-                    aria-selected="true">
-                    👥 Solicitudes de Promotores
+                    data-bs-target="#users-pane" type="button" role="tab">
+                    👥 Solicitudes (Promotores)
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link fw-bold text-dark" id="events-tab" data-bs-toggle="tab"
-                    data-bs-target="#events-pane" type="button" role="tab" aria-controls="events-pane"
-                    aria-selected="false">
-                    📅 Eventos Pendientes
+                    data-bs-target="#events-pane" type="button" role="tab">
+                    📅 Eventos Comunitarios
+                </button>
+            </li>
+            <!-- NUEVO: Pestaña de Todos los Usuarios -->
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold text-dark" id="all-users-tab" data-bs-toggle="tab"
+                    data-bs-target="#all-users-pane" type="button" role="tab">
+                    ⚙️ Gestión de Usuarios
                 </button>
             </li>
         </ul>
 
         <div class="tab-content" id="moderatorTabsContent">
 
-            <!-- Pestaña 1: Promotores Pendientes -->
-            <div class="tab-pane fade show active" id="users-pane" role="tabpanel" aria-labelledby="users-tab"
-                tabindex="0">
+            <!-- Pestaña 1: Solicitudes de Promotores -->
+            <div class="tab-pane fade show active" id="users-pane" role="tabpanel" tabindex="0">
                 <div class="card border-0 shadow-sm p-4">
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle" aria-label="Lista de promotores pendientes">
+                        <table class="table table-hover align-middle">
                             <thead class="table-light">
                                 <tr>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Correo Electrónico</th>
-                                    <th scope="col">Estado Actual</th>
-                                    <th scope="col" class="text-end">Acciones</th>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Estado</th>
+                                    <th class="text-end">Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody id="pendingPromotersContainer" aria-live="polite">
+                            <tbody id="pendingPromotersContainer">
                                 <tr>
-                                    <td colspan="4" class="text-center py-4 text-muted">Cargando solicitudes...</td>
+                                    <td colspan="4" class="text-center py-4 text-muted">Cargando...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -77,24 +81,45 @@
                 </div>
             </div>
 
-            <!-- Pestaña 2: Eventos Pendientes -->
-            <div class="tab-pane fade" id="events-pane" role="tabpanel" aria-labelledby="events-tab" tabindex="0">
+            <!-- Pestaña 2: Eventos Comunitarios -->
+            <div class="tab-pane fade" id="events-pane" role="tabpanel" tabindex="0">
                 <div class="card border-0 shadow-sm p-4">
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle"
-                            aria-label="Lista de eventos comunitarios pendientes">
+                        <table class="table table-hover align-middle">
                             <thead class="table-light">
                                 <tr>
-                                    <th scope="col">Título del Evento</th>
-                                    <th scope="col">Creado por</th>
-                                    <th scope="col">Fecha del Evento</th>
-                                    <th scope="col" class="text-end">Acciones</th>
+                                    <th>Título del Evento</th>
+                                    <th>Creado por</th>
+                                    <th>Fecha</th>
+                                    <th class="text-end">Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody id="pendingEventsContainer" aria-live="polite">
+                            <tbody id="pendingEventsContainer">
                                 <tr>
-                                    <td colspan="4" class="text-center py-4 text-muted">Cargando eventos sugeridos...
-                                    </td>
+                                    <td colspan="4" class="text-center py-4 text-muted">Cargando...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña 3: TODOS LOS USUARIOS (Gestión) -->
+            <div class="tab-pane fade" id="all-users-pane" role="tabpanel" tabindex="0">
+                <div class="card border-0 shadow-sm p-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Nombre y Correo</th>
+                                    <th>Rol Actual</th>
+                                    <th>Estado</th>
+                                    <th class="text-end">Sanción (Degradar)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allUserPromotersContainer">
+                                <tr>
+                                    <td colspan="4" class="text-center py-4 text-muted">Cargando usuarios...</td>
                                 </tr>
                             </tbody>
                         </table>
