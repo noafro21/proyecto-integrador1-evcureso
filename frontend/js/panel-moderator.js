@@ -32,6 +32,7 @@ function protectModeratorRoute() {
   // Cargamos la información de ambas pestañas
   loadPendingPromoters();
   loadPendingEvents();
+  loadAllUserPromoters();
 }
 
 // 2. CARGAR: Lista de Promotores Pendientes
@@ -111,7 +112,6 @@ async function loadPendingEvents() {
     container.innerHTML = `<tr><td colspan="4" class="text-center text-danger">Debes crear la ruta /eventos/pendientes en tu backend.</td></tr>`;
   }
 }
-
 // ==========================================
 // ACCIONES PARA PROMOTORES
 // ==========================================
@@ -193,4 +193,100 @@ window.rejectEvent = function (eventId) {
     "La función para eliminar el evento permanentemente se puede agregar pronto.",
     "info",
   );
+};
+// ==========================================
+// PESTAÑA 3: GESTIÓN DE TODOS LOS USUARIOS
+// ==========================================
+async function loadAllUserPromoters() {
+  // ⚠️ Importante: Usamos el ID exacto de tu HTML
+  const container = document.getElementById("allUserPromotersContainer");
+  if (!container) return;
+
+  try {
+    // Hacemos la petición a la BD usando 127.0.0.1
+    const response = await fetch("http://127.0.0.1:3000/usuarios");
+    const users = await response.json();
+
+    container.innerHTML = "";
+
+    // Filtramos para no mostrar al Moderador (así evitamos que se degrade a sí mismo por error)
+    const filteredUsers = users.filter((user) => user.role !== "Moderador");
+
+    if (filteredUsers.length === 0) {
+      container.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-muted">No hay usuarios registrados en el sistema.</td></tr>`;
+      return;
+    }
+
+    filteredUsers.forEach((user) => {
+      let badgeClass = user.role === "Promotor" ? "bg-primary" : "bg-secondary";
+
+      // Botón de sanción: Solo habilitado si el usuario es "Promotor"
+      let actionBtn = "";
+      if (user.role === "Promotor") {
+        actionBtn = `<button class="btn btn-sm btn-outline-danger fw-bold" onclick="window.downgradeUser('${user._id}', '${user.fullName}')">Sancionar</button>`;
+      } else {
+        actionBtn = `<span class="small text-muted">Sancionado</span>`;
+      }
+
+      const row = `<tr>
+                <td>
+                    <strong>${user.fullName}</strong><br>
+                    <small class="text-muted">${user.email}</small>
+                </td>
+                <td><span class="badge ${badgeClass}">${user.role}</span></td>
+                <td>${user.status}</td>
+                <td class="text-end">${actionBtn}</td>
+            </tr>`;
+
+      container.innerHTML += row;
+    });
+  } catch (error) {
+    container.innerHTML = `<tr><td colspan="4" class="text-center text-danger">Error al cargar usuarios.</td></tr>`;
+  }
+}
+
+// ==========================================
+// ACCIÓN: Degradar (Sancionar a un Promotor)
+// ==========================================
+window.downgradeUser = async function (userId, userName) {
+  const result = await Swal.fire({
+    title: `¿Degradar a ${userName}?`,
+    text: "Perderá sus privilegios de publicación directa y volverá a ser un Explorador.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Sí, degradar",
+    cancelButtonText: "Cancelar",
+  });
+
+  if (result.isConfirmed) {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:3000/usuarios/${userId}/degradar`,
+        {
+          method: "PUT",
+        },
+      );
+
+      if (response.ok) {
+        Swal.fire(
+          "Sancionado",
+          "El usuario ha perdido el rol de Promotor.",
+          "success",
+        );
+        // Refrescamos la tabla para ver el cambio inmediato
+        loadAllUserPromoters();
+      } else {
+        const data = await response.json();
+        Swal.fire(
+          "Error",
+          data.mensajeError || "No se pudo cambiar el rol.",
+          "error",
+        );
+      }
+    } catch (error) {
+      Swal.fire("Error", "Falla de conexión con el servidor.", "error");
+    }
+  }
 };
