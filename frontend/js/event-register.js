@@ -18,6 +18,8 @@ async function handleCreateEventSubmit(event) {
       icon: "error",
       title: "Sesión expirada",
       text: "Debes iniciar sesión para publicar.",
+    }).then(() => {
+      window.location.href = "login.html";
     });
     return;
   }
@@ -41,7 +43,7 @@ async function handleCreateEventSubmit(event) {
       title: "Acceso Restringido",
       text: 'Como Explorador, solo puedes sugerir eventos de tipo "Comunitaria". Los eventos "Oficiales" son exclusivos para Promotores y Moderadores.',
       confirmButtonText: "Entendido",
-      confirmButtonColor: "#FF8C42", // Naranja de tu marca
+      confirmButtonColor: "#FF8C42", // Naranja de la marca
     });
     return; // Detiene la ejecución, no se envía la petición al servidor
   }
@@ -61,17 +63,18 @@ async function handleCreateEventSubmit(event) {
     eventDate,
     location: {
       type: "Point",
-      coordinates: [-84.08, 9.93], // Coordenadas fijas sin usar mapa en el HTML
+      coordinates: [-84.08, 9.93], // Coordenadas fijas temporalmente sin mapa
       addressName,
     },
     categories: selectedCategories,
-    sourceType: sourceType,
+    sourceType: sourceType, // Enviamos "Oficial" o "Comunitaria" directo al backend
     creator: currentUser.id,
     imageUrl: imageUrl || null,
   };
 
   try {
-    const response = await fetch("http://localhost:3000/eventos/crear", {
+    // ⚠️ SOLUCIÓN: Usar 127.0.0.1 en lugar de localhost para evitar bloqueos de red
+    const response = await fetch("http://127.0.0.1:3000/eventos/crear", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(eventData),
@@ -89,7 +92,7 @@ async function handleCreateEventSubmit(event) {
             : "El evento ya está disponible en el catálogo.",
         confirmButtonText: "Genial",
       });
-      window.location.href = "index.html"; // Lo enviamos a ver el feed de eventos
+      window.location.href = "index.html"; // Lo enviamos a ver el catálogo de eventos
     } else {
       Swal.fire({
         icon: "error",
