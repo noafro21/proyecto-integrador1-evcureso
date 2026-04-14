@@ -127,40 +127,6 @@ router.get("/pendientes", async (req, res) => {
 });
 
 // ==========================================
-// 4. GET: Buscar eventos cercanos (GeoJSON) a menos de X km
-// ==========================================
-router.get("/cercanos", async (req, res) => {
-  const { lat, lng, km } = req.query;
-
-  if (!lat || !lng || !km) {
-    return res
-      .status(400)
-      .json({ mensajeError: "Debes proporcionar lat, lng y km en la URL." });
-  }
-
-  try {
-    const distanciaEnMetros = parseFloat(km) * 1000;
-
-    const eventosCercanos = await Event.find({
-      location: {
-        $near: {
-          $geometry: {
-            type: "Point",
-            coordinates: [parseFloat(lng), parseFloat(lat)],
-          },
-          $maxDistance: distanciaEnMetros,
-        },
-      },
-      status: "Activo",
-    }).populate("creator", "fullName email role");
-
-    res.json(eventosCercanos);
-  } catch (error) {
-    res.status(500).json({ mensajeError: error.message });
-  }
-});
-
-// ==========================================
 // 5. PUT: Aprobar un evento comunitario (Solo Moderadores)
 // (Esta ruta DEBE estar antes que /:id)
 // ==========================================
@@ -241,6 +207,27 @@ router.put("/:id/cancelar", async (req, res) => {
     await evento.save();
 
     res.status(200).json({ mensaje: "Evento cancelado exitosamente.", evento });
+  } catch (error) {
+    res.status(500).json({ mensajeError: error.message });
+  }
+});
+
+// ==========================================
+// 7. DELETE: Eliminar un evento permanentemente
+// ==========================================
+router.delete("/:id/eliminar", async (req, res) => {
+  try {
+    const eventoId = req.params.id;
+    const eventoEliminado = await Event.findByIdAndDelete(eventoId);
+
+    if (!eventoEliminado) {
+      return res.status(404).json({ mensajeError: "Evento no encontrado." });
+    }
+
+    res.status(200).json({
+      mensaje: "Evento eliminado permanentemente.",
+      evento: eventoEliminado,
+    });
   } catch (error) {
     res.status(500).json({ mensajeError: error.message });
   }
