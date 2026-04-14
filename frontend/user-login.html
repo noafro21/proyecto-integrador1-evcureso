@@ -6,88 +6,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - Evcureso</title>
 
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="./assets/images/favicon-3.png"
         onerror="this.href='https://via.placeholder.com/32x32?text=E'">
+
+    <!-- Fuentes de Google: Montserrat y Open Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet">
-    <!-- Bootstrap 5 CSS (CDN), NORMALIZE -->
+
+    <!-- FontAwesome para los íconos premium -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Bootstrap 5 CSS y Normalize (90% de los estilos) -->
     <link rel="stylesheet" href="./css/normalize.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Estilos personalizados -->
+
+    <!-- Estilo Global Personalizado (10% de los estilos: colores, fuentes, modo oscuro) -->
     <link rel="stylesheet" href="./css/global-style.css">
     <link rel="stylesheet" href="./css/header-style.css">
-    <link rel="stylesheet" href="./css/sidebar-style.css">
-    <link rel="stylesheet" href="./css/feed-style.css">
 </head>
 
 <body class="bg-light">
 
-    <header class="evc-header text-white shadow-sm" id="navbar-container"></header>
+    <!-- El Header se inyectará dinámicamente con tu load-navbar.js -->
+    <header class="evc-header text-white" id="navbar-container"></header>
 
-    <main class="evc-auth-container container my-5 d-flex justify-content-center">
-        <section class="evc-auth-card card shadow border-0 w-100" style="max-width: 500px;">
-            <div class="card-body p-4">
+    <main class="container my-5 d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+        <section class="card shadow-sm border-0 w-100" style="max-width: 450px;">
+            <div class="card-body p-4 p-md-5">
+
                 <div class="text-center mb-4">
-                    <h1 class="h4 fw-bold mb-1">¡Hola de nuevo!</h1>
+                    <h1 class="h3 fw-bold mb-2">¡Hola de nuevo!</h1>
                     <p class="text-muted small">Ingresa tus credenciales para continuar.</p>
                 </div>
 
-                <form id="evcLoginForm" class="evc-form">
+                <!-- Formulario original con tus IDs intactos -->
+                <form id="evcLoginForm">
                     <div class="mb-3">
-                        <label for="loginEmail" class="form-label fw-bold small">Correo Electrónico</label>
-                        <input type="email" class="form-control evc-input" id="loginEmail"
+                        <label for="loginEmail" class="form-label fw-bold small"><i
+                                class="fa-solid fa-envelope text-muted me-1"></i> Correo Electrónico</label>
+                        <input type="email" class="form-control evc-form-input shadow-none" id="loginEmail"
                             placeholder="ejemplo@correo.com" required autocomplete="email">
                     </div>
 
                     <div class="mb-4">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <label for="loginPassword" class="form-label fw-bold small m-0">Contraseña</label>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label for="loginPassword" class="form-label fw-bold small m-0"><i
+                                    class="fa-solid fa-lock text-muted me-1"></i> Contraseña</label>
                             <a href="#" class="small text-decoration-none evc-link-forgot">¿Olvidaste tu contraseña?</a>
                         </div>
-                        <input type="password" class="form-control evc-input mt-2" id="loginPassword"
+                        <input type="password" class="form-control evc-form-input shadow-none" id="loginPassword"
                             placeholder="••••••••" required autocomplete="current-password">
                     </div>
 
                     <div class="d-grid mb-3">
-                        <button type="submit" class="btn btn-primary fw-bold evc-btn-submit py-2">Ingresar a
-                            Evcureso</button>
+                        <button type="submit" class="btn fw-bold py-2 evc-btn-submit">Iniciar
+                            Sesión</button>
                     </div>
                 </form>
 
-                <div class="accordion mt-4" id="testCredentialsAccordion">
-                    <div class="accordion-item border-info">
-                        <h2 class="accordion-header">
-                            <button
-                                class="accordion-button collapsed bg-info bg-opacity-10 text-dark py-2 px-3 small fw-bold"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseCredentials">
-                                🛠️ Credenciales de Prueba (Fase Dev)
-                            </button>
-                        </h2>
-                        <div id="collapseCredentials" class="accordion-collapse collapse"
-                            data-bs-parent="#testCredentialsAccordion">
-                            <div class="accordion-body small bg-light">
-                                <ul class="list-unstyled mb-0 text-muted">
-                                    <li class="mb-2"><strong>Promotor:</strong><br> p_adi_kamakiri@gmail.com / asd123
-                                    </li>
-                                    <li class="mb-2"><strong>Explorador:</strong><br> initado_adi_aguacaliente@gmail.com
-                                        / qwe123</li>
-                                    <li><strong>Moderador:</strong><br> validador_adi_ba@gmail.com / zxc123</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <div class="text-center mt-3">
+                    <p class="small text-muted mb-0">¿No tienes una cuenta? <a href="user-register.html"
+                            class="fw-bold text-decoration-none evc-link-forgot">Regístrate aquí</a></p>
                 </div>
+
+                <hr class="my-4 opacity-25">
             </div>
         </section>
     </main>
 
-
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./js/load-navbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/load-navbar.js"></script>
     <script src="./js/user-login.js"></script>
 </body>
 
