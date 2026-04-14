@@ -1,58 +1,40 @@
-/* HEADER Y BARRA DE NAVEGACIÓN */
-
-/* Fondo del Header usando la variable global */
+/* ==========================================
+   HEADER Y BARRA DE NAVEGACIÓN
+   ========================================== */
 .evc-header {
     background-color: var(--evc-primary-blue);
     border-bottom: 4px solid var(--evc-accent-orange);
     position: sticky; 
     top: 0;
     z-index: 1000;
-    
 }
 
-/* Ajuste del nombre de la marca */
 .evc-header .evc-brand-name {
     font-size: 1.5rem;
     letter-spacing: -0.5px;
 }
 
-/* BUSCADOR PRINCIPAL========================================== */
+/* BUSCADOR PRINCIPAL */
 .evc-search-form .evc-search-input {
     border: 2px solid transparent;
     background-color: rgba(255, 255, 255, 0.9);
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .evc-search-form .evc-search-input:focus {
-    background-color: var(--evc-text-inverted);
-    /* El borde naranja de accesibilidad global se activará aquí automáticamente */
+    background-color: var(--evc-bg-card);
+    color: var(--evc-text-main);
 }
 
 .evc-search-form .evc-btn-search {
     background-color: var(--evc-accent-orange);
-    color: var(--evc-text-inverted);
+    color: #ffffff;
     border: none;
-    font-weight: 600;
+    transition: background-color 0.2s;
 }
 
-.evc-search-form .evc-btn-search:hover {
-    background-color: #993B00; /* Naranja oscurecido */
-}
+.evc-search-form .evc-btn-search:hover { background-color: #e67d3b; }
 
 /* ENLACES DE NAVEGACIÓN */
-.evc-nav .nav-link {
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 600;
-    transition: color 0.2s ease;
-}
-
-.evc-nav .nav-link:hover,
-.evc-nav .nav-link.active {
-    color: var(--evc-text-inverted);
-}
-
-/* Botón de Regresar (Pantalla Login) */
-.evc-btn-back {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-}
+.evc-nav .nav-link { color: rgba(255, 255, 255, 0.85); transition: color 0.2s ease; }
+.evc-nav .nav-link:hover, .evc-nav .nav-link.active { color: #ffffff; }

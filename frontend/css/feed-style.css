@@ -1,95 +1,42 @@
 /* ==========================================
-   FEED DE EVENTOS (TARJETAS)
+   FEED DE EVENTOS Y TARJETAS
    ========================================== */
+/* Custom Scrollbar */
+.evc-feed-container::-webkit-scrollbar { width: 6px; }
+.evc-feed-container::-webkit-scrollbar-track { background: transparent; }
+.evc-feed-container::-webkit-scrollbar-thumb { background: var(--evc-border-color); border-radius: 4px; }
+.evc-feed-container::-webkit-scrollbar-thumb:hover { background: var(--evc-primary-blue); }
 
-/* Personalización de la barra de desplazamiento (Scrollbar) para la lista */
-.evc-feed-container::-webkit-scrollbar {
-    width: 6px;
-}
-.evc-feed-container::-webkit-scrollbar-track {
-    background: var(--evc-bg-light); 
-    border-radius: 4px;
-}
-.evc-feed-container::-webkit-scrollbar-thumb {
-    background: #cdd4d9; 
-    border-radius: 4px;
-}
-.evc-feed-container::-webkit-scrollbar-thumb:hover {
-    background: var(--evc-primary-blue); 
-}
-
-/* ==========================================
-   DISEÑO DE LAS TARJETAS (ARTICLE)
-   ========================================== */
 .evc-event-card {
     border-radius: 12px;
     overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid var(--evc-border-color);
+    background-color: var(--evc-bg-card);
 }
 
-/* Efecto Hover: Eleva ligeramente la tarjeta */
 .evc-event-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(42, 92, 130, 0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Imagen del evento (Mantiene la proporción sin deformarse) */
 .evc-event-image {
     height: 160px;
     object-fit: cover;
     border-bottom: 1px solid var(--evc-border-color);
 }
 
-/* Título del evento */
-.evc-event-title {
-    color: var(--evc-primary-blue);
-    margin-bottom: 0.5rem;
-}
+.evc-event-title { margin-bottom: 0.5rem; }
 
-/* ==========================================
-   ETIQUETAS Y BADGES
-   ========================================== */
+/* ETIQUETAS Y BADGES (A11Y) */
+span.badge.evc-badge-official { background-color: var(--evc-accent-green); color: #ffffff; padding: 0.4em 0.6em; }
+span.badge.evc-badge-community { background-color: #ffc107; color: #000000; font-weight: bold; padding: 0.4em 0.6em; }
 
-/* Badges de fuente oficial/comunitaria */ 
-span.badge.evc-badge-official {
-    background-color: var(--evc-accent-green);
-    color: #ffffff; 
-    font-size: 0.7rem;
-    padding: 0.4em 0.6em;
-}
-
-/* CORRECCIÓN A11Y: Aumentamos la especificidad encadenando clases 
-   (span.badge.evc-badge-community) para ganarle a Bootstrap sin usar !important.
-   Esto fuerza el texto a negro puro (#000000) sobre el amarillo, pasando el WCAG AAA. */
-span.badge.evc-badge-community {
-    background-color: #ffc107; 
-    color: #000000; 
-    font-weight: bold; 
-    font-size: 0.7rem;
-    padding: 0.4em 0.6em;
-}
-
-/* ==========================================
-   CORRECCIÓN VISUAL DE CATEGORÍAS (A11Y)
-   ========================================== */
-/* Etiquetas de categoría (Ej. #Cultura) */
 span.badge.evc-tag {
-    font-weight: 600;
-    font-size: 0.75rem;
-    color: var(--evc-primary-blue); /* Texto azul oscuro para contraste fuerte */
-    background-color: #eef2f5; /* Fondo celeste/gris muy clarito */
-    border: 1px solid rgba(42, 92, 130, 0.2); /* Borde sutil azul */
+    font-weight: 600; font-size: 0.75rem;
+    color: var(--evc-text-muted);
+    background-color: transparent;
+    border: 1px solid var(--evc-border-color);
     transition: all 0.2s ease;
 }
-
-span.badge.evc-tag:hover {
-    background-color: var(--evc-primary-blue);
-    color: #ffffff;
-}
-
-/* Botones de acción en el pie de la tarjeta */
-.evc-btn-locate, .evc-btn-save-plan {
-    border-radius: 20px;
-    font-weight: 600;
-}
+span.badge.evc-tag:hover { color: var(--evc-primary-blue); border-color: var(--evc-primary-blue); }
