@@ -29,7 +29,7 @@ function protectModeratorRoute() {
     return;
   }
 
-  // Cargamos la información de ambas pestañas
+  // Se llama la información de las ambas pestañas
   loadPendingPromoters();
   loadPendingEvents();
   loadAllUserPromoters();
@@ -56,10 +56,10 @@ async function loadPendingPromoters() {
                 <tr>
                     <td class="fw-bold">${user.fullName}</td>
                     <td>${user.email}</td>
-                    <td><span class="badge bg-warning text-dark px-2 py-1">${user.status}</span></td>
+                    <td><span class="badge evc-badge-pending px-2 py-1">${user.status}</span></td>
                     <td class="text-end">
                         <button class="btn btn-sm btn-success fw-bold me-2" onclick="window.approvePromoter('${user._id}')">✔️ Aprobar</button>
-                        <button class="btn btn-sm btn-outline-danger fw-bold" onclick="window.rejectPromoter('${user._id}')">❌ Rechazar</button>
+                      <button class="btn btn-sm fw-bold evc-btn-reject" onclick="window.rejectPromoter('${user._id}')">❌ Rechazar</button>
                     </td>
                 </tr>
             `;
@@ -97,12 +97,12 @@ async function loadPendingEvents() {
 
       const row = `
                 <tr>
-                    <td class="fw-bold text-primary">${event.title}</td>
+                    <td class="fw-bold evc-event-title-cell">${event.title}</td>
                     <td><span class="badge bg-secondary">${creatorName}</span></td>
                     <td>${eventDate}</td>
                     <td class="text-end">
                         <button class="btn btn-sm btn-success fw-bold me-2" onclick="window.approveEvent('${event._id}')">✔️ Aprobar</button>
-                        <button class="btn btn-sm btn-outline-danger fw-bold" onclick="window.rejectEvent('${event._id}')">🗑️ Borrar</button>
+                      <button class="btn btn-sm fw-bold evc-btn-reject" onclick="window.rejectEvent('${event._id}')">🗑️ Borrar</button>
                     </td>
                 </tr>
             `;
@@ -138,17 +138,43 @@ window.approvePromoter = async function (userId) {
 };
 
 window.rejectPromoter = async function (userId) {
-  Swal.fire({
+  const result = await Swal.fire({
     title: "¿Rechazar solicitud?",
     text: "El usuario será convertido en Explorador normal.",
     icon: "warning",
     showCancelButton: true,
     confirmButtonText: "Sí, rechazar",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire("Info", "Función de rechazo en construcción", "info");
-    }
+    cancelButtonText: "Cancelar",
   });
+
+  if (!result.isConfirmed) return;
+
+  try {
+    const response = await fetch(
+      `http://localhost:3000/usuarios/${userId}/sancionar`,
+      { method: "PUT" },
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      Swal.fire(
+        "Solicitud rechazada",
+        "El usuario fue convertido a Explorador.",
+        "success",
+      );
+      loadPendingPromoters();
+      loadAllUserPromoters();
+    } else {
+      Swal.fire(
+        "Error",
+        data.mensajeError || "No se pudo rechazar la solicitud.",
+        "error",
+      );
+    }
+  } catch (error) {
+    Swal.fire("Error", "Falla de conexión con el servidor.", "error");
+  }
 };
 
 // ==========================================
@@ -223,7 +249,7 @@ async function loadAllUserPromoters() {
       // Botón de sanción: Solo habilitado si el usuario es "Promotor"
       let actionBtn = "";
       if (user.role === "Promotor") {
-        actionBtn = `<button class="btn btn-sm btn-outline-danger fw-bold" onclick="window.downgradeUser('${user._id}', '${user.fullName}')">Sancionar</button>`;
+        actionBtn = `<button class="btn btn-sm fw-bold evc-btn-reject" onclick="window.downgradeUser('${user._id}', '${user.fullName}')">Sancionar</button>`;
       } else {
         actionBtn = `<span class="small text-muted">Sancionado</span>`;
       }
