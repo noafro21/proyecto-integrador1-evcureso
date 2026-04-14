@@ -159,11 +159,12 @@ function renderEvents(events) {
     const imgSource = eventData.imageUrl
       ? eventData.imageUrl
       : `https://via.placeholder.com/400x200?text=${encodeURIComponent(eventData.title)}`;
+    const imageAlt = `Imagen del evento: ${eventData.title}`;
 
     const cardHtml = `
             <div class="col" role="listitem">
                 <article class="evc-event-card card h-100 shadow-sm">
-                    <img src="${imgSource}" class="card-img-top evc-event-image" alt="Imagen del evento" onerror="this.src='https://via.placeholder.com/400x200?text=Error'">
+                <img src="${imgSource}" class="card-img-top evc-event-image" alt="${imageAlt}" onerror="this.src='https://via.placeholder.com/400x200?text=Error'">
                     <div class="card-body d-flex flex-column">
                         <header class="d-flex justify-content-between align-items-center mb-3">
                             <span class="badge ${badgeClass}">${badgeText}</span>
