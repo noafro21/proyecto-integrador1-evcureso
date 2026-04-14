@@ -4,9 +4,28 @@
 
 const createEventForm = document.getElementById("evcCreateEventForm");
 
+document.addEventListener("DOMContentLoaded", () => {
+  const storedUser = localStorage.getItem("currentUser");
+  const sourceTypeInput = document.getElementById("eventSourceType");
+
+  if (!storedUser || !sourceTypeInput) return;
+
+  const currentUser = JSON.parse(storedUser);
+
+  if (currentUser.role === "Explorador") {
+    sourceTypeInput.value = "Comunitaria";
+    const officialOption = sourceTypeInput.querySelector(
+      'option[value="Oficial"]',
+    );
+    if (officialOption) officialOption.disabled = true;
+  } else {
+    sourceTypeInput.value = "Oficial";
+  }
+});
+
 /**
  * Maneja el envío del formulario para crear un evento.
- * @param {Event} event - El evento de envío.
+  @param {Event} event - El evento de envío.
  */
 async function handleCreateEventSubmit(event) {
   event.preventDefault();
@@ -19,7 +38,7 @@ async function handleCreateEventSubmit(event) {
       title: "Sesión expirada",
       text: "Debes iniciar sesión para publicar.",
     }).then(() => {
-      window.location.href = "login.html";
+      window.location.href = "user-login.html";
     });
     return;
   }
