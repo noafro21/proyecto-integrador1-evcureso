@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Evento - Evcureso</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/images/favicon-3.png"
+        onerror="this.href='https://via.placeholder.com/32x32?text=E'">
+
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Bootstrap y estilos base -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="./css/global-style.css">
+    <link rel="stylesheet" href="./css/header-style.css">
+</head>
+
+<body class="bg-light">
+
+    <header class="evc-header text-white" id="navbar-container"></header>
+
+    <main class="container my-5">
+        <section class="card shadow-sm border-0 mx-auto" style="max-width: 980px;">
+            <div class="card-body p-4 p-md-5">
+                <div class="text-center mb-4">
+                    <h1 class="h3 fw-bold mb-2">Publicar Evento</h1>
+                    <p class="text-muted small mb-0">Crea una propuesta oficial o comunitaria para compartirla con la
+                        comunidad.</p>
+                </div>
+
+                <form id="evcCreateEventForm">
+                    <div class="row g-4">
+                        <div class="col-12 col-lg-8">
+                            <div class="mb-3">
+                                <label for="eventTitle" class="form-label fw-bold small"><i
+                                        class="fa-solid fa-heading text-muted me-1"></i> Título del evento</label>
+                                <input type="text" class="form-control evc-form-input shadow-none" id="eventTitle"
+                                    placeholder="Ej. Festival de verano" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="eventDescription" class="form-label fw-bold small"><i
+                                        class="fa-solid fa-align-left text-muted me-1"></i> Descripción</label>
+                                <textarea class="form-control evc-form-input shadow-none" id="eventDescription" rows="6"
+                                    placeholder="Describe el evento, la actividad y lo que la gente puede esperar."
+                                    required></textarea>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="eventDate" class="form-label fw-bold small"><i
+                                            class="fa-regular fa-calendar text-muted me-1"></i> Fecha y hora</label>
+                                    <input type="datetime-local" class="form-control evc-form-input shadow-none"
+                                        id="eventDate" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="eventAddress" class="form-label fw-bold small"><i
+                                            class="fa-solid fa-location-dot text-muted me-1"></i> Ubicación</label>
+                                    <input type="text" class="form-control evc-form-input shadow-none" id="eventAddress"
+                                        placeholder="Ej. Parque Central, Copalchi" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 mt-3">
+                                <label for="eventImageUrl" class="form-label fw-bold small"><i
+                                        class="fa-regular fa-image text-muted me-1"></i> URL de imagen</label>
+                                <input type="url" class="form-control evc-form-input shadow-none" id="eventImageUrl"
+                                    placeholder="https://...">
+                                <div class="form-text small">Opcional. Si lo dejas vacío, se mostrará una imagen de
+                                    respaldo.</div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-4">
+                            <div class="card evc-promotor-card border-0 p-3 mb-3 rounded">
+                                <label for="eventSourceType" class="form-label fw-bold small"><i
+                                        class="fa-solid fa-bullhorn text-muted me-1"></i> Tipo de publicación</label>
+                                <select id="eventSourceType" class="form-select evc-select-input shadow-none">
+                                    <option value="Comunitaria" selected>Comunitaria</option>
+                                    <option value="Oficial">Oficial</option>
+                                </select>
+                                <p class="small mb-0 mt-2 evc-promotor-help">Si eres Explorador, solo puedes sugerir
+                                    eventos comunitarios.</p>
+                            </div>
+
+                            <div class="card evc-promotor-card border-0 p-3 rounded">
+                                <p class="form-label fw-bold small mb-3"><i
+                                        class="fa-solid fa-tags text-muted me-1"></i> Categorías</p>
+
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input category-checkbox shadow-none" type="checkbox"
+                                        id="catAireLibre" value="#AireLibre">
+                                    <label class="form-check-label evc-checkbox-label" for="catAireLibre"><i
+                                            class="fa-solid fa-tree evc-icon-nature me-1"></i> #AireLibre</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input category-checkbox shadow-none" type="checkbox"
+                                        id="catCultura" value="#Cultura">
+                                    <label class="form-check-label evc-checkbox-label" for="catCultura"><i
+                                            class="fa-solid fa-masks-theater evc-icon-culture me-1"></i>
+                                        #Cultura</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input category-checkbox shadow-none" type="checkbox"
+                                        id="catGastronomia" value="#Gastronomía">
+                                    <label class="form-check-label evc-checkbox-label" for="catGastronomia"><i
+                                            class="fa-solid fa-burger evc-icon-food me-1"></i> #Gastronomía</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input category-checkbox shadow-none" type="checkbox"
+                                        id="catEcoturismo" value="#Ecoturismo">
+                                    <label class="form-check-label evc-checkbox-label" for="catEcoturismo"><i
+                                            class="fa-solid fa-leaf evc-icon-eco me-1"></i> #Ecoturismo</label>
+                                </div>
+                                <div class="form-check mb-0">
+                                    <input class="form-check-input category-checkbox shadow-none" type="checkbox"
+                                        id="catMusica" value="#Música">
+                                    <label class="form-check-label evc-checkbox-label" for="catMusica"><i
+                                            class="fa-solid fa-music evc-icon-music me-1"></i> #Música</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid d-md-flex justify-content-md-end mt-4 gap-2">
+                        <button type="submit" class="btn fw-bold py-2 evc-btn-suggest px-4">Publicar Evento</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bootstrap 5(CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Scripts de la aplicación -->
+    <script src="./js/load-navbar.js"></script>
+    <script src="./js/event-register.js"></script>
+</body>
+
+</html>

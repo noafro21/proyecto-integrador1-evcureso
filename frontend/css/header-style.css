@@ -1,0 +1,40 @@
+/* ==========================================
+   HEADER Y BARRA DE NAVEGACIÓN
+   ========================================== */
+.evc-header {
+    background-color: var(--evc-primary-blue);
+    border-bottom: 4px solid var(--evc-accent-orange);
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+}
+
+.evc-header .evc-brand-name {
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+}
+
+/* BUSCADOR PRINCIPAL */
+.evc-search-form .evc-search-input {
+    border: 2px solid transparent;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+}
+
+.evc-search-form .evc-search-input:focus {
+    background-color: var(--evc-bg-card);
+    color: var(--evc-text-main);
+}
+
+.evc-search-form .evc-btn-search {
+    background-color: var(--evc-accent-orange);
+    color: #ffffff;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.evc-search-form .evc-btn-search:hover { background-color: #e67d3b; }
+
+/* ENLACES DE NAVEGACIÓN */
+.evc-nav .nav-link { color: rgba(255, 255, 255, 0.85); transition: color 0.2s ease; }
+.evc-nav .nav-link:hover, .evc-nav .nav-link.active { color: #ffffff; }

@@ -1,0 +1,42 @@
+/* ==========================================
+   FEED DE EVENTOS Y TARJETAS
+   ========================================== */
+/* Custom Scrollbar */
+.evc-feed-container::-webkit-scrollbar { width: 6px; }
+.evc-feed-container::-webkit-scrollbar-track { background: transparent; }
+.evc-feed-container::-webkit-scrollbar-thumb { background: var(--evc-border-color); border-radius: 4px; }
+.evc-feed-container::-webkit-scrollbar-thumb:hover { background: var(--evc-primary-blue); }
+
+.evc-event-card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--evc-border-color);
+    background-color: var(--evc-bg-card);
+}
+
+.evc-event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.evc-event-image {
+    height: 160px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--evc-border-color);
+}
+
+.evc-event-title { margin-bottom: 0.5rem; }
+
+/* ETIQUETAS Y BADGES (A11Y) */
+span.badge.evc-badge-official { background-color: var(--evc-accent-green); color: #ffffff; padding: 0.4em 0.6em; }
+span.badge.evc-badge-community { background-color: #ffc107; color: #000000; font-weight: bold; padding: 0.4em 0.6em; }
+
+span.badge.evc-tag {
+    font-weight: 600; font-size: 0.75rem;
+    color: var(--evc-text-muted);
+    background-color: transparent;
+    border: 1px solid var(--evc-border-color);
+    transition: all 0.2s ease;
+}
+span.badge.evc-tag:hover { color: var(--evc-primary-blue); border-color: var(--evc-primary-blue); }

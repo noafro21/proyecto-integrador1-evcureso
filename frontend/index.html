@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evcureso - Descubre eventos cerca de ti</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/images/favicon-3.png"
+        onerror="this.href='https://via.placeholder.com/32x32?text=E'">
+
+    <!-- Fuentes de Google: Montserrat (Títulos) y Open Sans-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome para los íconos premium -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Bootstrap 5 CSS (CDN)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilos personalizados-->
+    <link rel="stylesheet" href="./css/global-style.css">
+    <link rel="stylesheet" href="./css/header-style.css">
+    <link rel="stylesheet" href="./css/feed-style.css">
+</head>
+
+<body class="bg-light">
+
+    <!-- HEADER & NAVEGACIÓN PRINCIPAL (Cargado por JS) -->
+    <header class="evc-header text-white" id="navbar-container"></header>
+
+    <!-- CONTENEDOR PRINCIPAL (GRID RESPONSIVE BOOTSTRAP) -->
+    <main class="evc-main-container container-fluid mt-3 px-4">
+        <h1 class="h2 fw-bold  mb-4">Descubre eventos cerca de ti</h1>
+
+        <div class="row">
+            <!-- BARRA LATERAL (Filtros) -->
+            <aside class="evc-sidebar-filters col-12 col-md-3 mb-4" aria-label="Filtros de búsqueda y categorías">
+                <div class="card p-3 shadow-sm border-0 evc-sticky-sidebar">
+
+                    <!-- Encabezado de los filtros -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="h5 m-0 fw-bold"><i class="fa-solid fa-filter evc-filter-icon me-2"></i>Filtros</h2>
+                        <button type="button" class="evc-btn-clear-filters btn btn-sm text-decoration-none"
+                            aria-label="Limpiar todos los filtros">
+                            <i class="fa-solid fa-eraser"></i> Limpiar
+                        </button>
+                    </div>
+
+                    <!-- Formulario de Filtros -->
+                    <form class="evc-filters-form">
+
+                        <!-- 1. Filtro: Fecha (Select) -->
+                        <div class="mb-4 evc-filter-group">
+                            <label for="dateFilter" class="form-label h6 fw-bold evc-filter-title fs-6"><i
+                                    class="fa-regular fa-calendar me-2"></i>¿Cuándo?</label>
+                            <select class="form-select evc-select-input shadow-none" id="dateFilter">
+                                <option value="cualquiera" selected>Cualquier fecha</option>
+                                <option value="hoy">Hoy</option>
+                                <option value="manana">Mañana</option>
+                                <option value="fin-semana">Este fin de semana</option>
+                            </select>
+                        </div>
+
+                        <!-- 2. Filtro: Categorías (Checkboxes) -->
+                        <fieldset class="mb-4 evc-filter-group">
+                            <legend class="h6 fw-bold evc-filter-title fs-6"><i
+                                    class="fa-solid fa-layer-group me-2"></i>Categorías de Interés</legend>
+
+                            <div class="form-check evc-checkbox-wrapper mb-2">
+                                <input class="form-check-input evc-checkbox-input shadow-none" type="checkbox"
+                                    id="catAireLibre" value="aire-libre">
+                                <label class="form-check-label evc-checkbox-label" for="catAireLibre"><i
+                                        class="fa-solid fa-tree evc-icon-nature me-1"></i> #AireLibre</label>
+                            </div>
+                            <div class="form-check evc-checkbox-wrapper mb-2">
+                                <input class="form-check-input evc-checkbox-input shadow-none" type="checkbox"
+                                    id="catCultura" value="cultura">
+                                <label class="form-check-label evc-checkbox-label" for="catCultura"><i
+                                        class="fa-solid fa-masks-theater evc-icon-culture me-1"></i> #Cultura</label>
+                            </div>
+                            <div class="form-check evc-checkbox-wrapper mb-2">
+                                <input class="form-check-input evc-checkbox-input shadow-none" type="checkbox"
+                                    id="catGastronomia" value="gastronomia">
+                                <label class="form-check-label evc-checkbox-label" for="catGastronomia"><i
+                                        class="fa-solid fa-burger evc-icon-food me-1"></i> #Gastronomía</label>
+                            </div>
+                            <div class="form-check evc-checkbox-wrapper mb-2">
+                                <input class="form-check-input evc-checkbox-input shadow-none" type="checkbox"
+                                    id="catEcoturismo" value="ecoturismo">
+                                <label class="form-check-label evc-checkbox-label" for="catEcoturismo"><i
+                                        class="fa-solid fa-leaf evc-icon-eco me-1"></i> #Ecoturismo</label>
+                            </div>
+                            <div class="form-check evc-checkbox-wrapper mb-2">
+                                <input class="form-check-input evc-checkbox-input shadow-none" type="checkbox"
+                                    id="catMusica" value="musica">
+                                <label class="form-check-label evc-checkbox-label" for="catMusica"><i
+                                        class="fa-solid fa-music evc-icon-music me-1"></i> #Música</label>
+                            </div>
+                        </fieldset>
+                    </form>
+
+                </div>
+            </aside>
+
+            <!-- ==========================================
+                 CATÁLOGO DE EVENTOS (FEED)
+                 ========================================== -->
+            <section class="evc-event-feed col-12 col-md-9 mb-4" aria-labelledby="feed-title">
+                <h2 id="feed-title" class="visually-hidden">Catálogo de Eventos</h2>
+
+                <!-- Encabezado de la lista -->
+                <div class="d-flex justify-content-between align-items-center mb-4 px-1 border-bottom pb-2">
+                    <h3 class="h4 m-0 fw-bold ">Explorar Eventos</h3>
+                    <span id="eventsCounter" class="badge bg-primary rounded-pill evc-feed-counter fs-6 px-3 py-2"
+                        aria-label="Contador de eventos" role="alert">
+                        Buscando eventos...
+                    </span>
+                </div>
+
+                <!-- Cuadrícula (Grid) de Tarjetas -->
+                <div id="eventsContainer" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 evc-feed-container"
+                    tabindex="0" aria-label="Lista de tarjetas de eventos" role="list">
+                    <!-- Las tarjetas de eventos se cargarán dinámicamente aquí -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Bootstrap 5(CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Scripts de la aplicación -->
+    <script src="./js/load-navbar.js"></script>
+    <script src="./js/list-event.js"></script>
+</body>
+
+</html>

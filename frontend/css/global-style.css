@@ -1,0 +1,327 @@
+/* ==========================================
+   VARIABLES GLOBALES Y MODO OSCURO
+   ========================================== */
+:root {
+    /* Paleta de colores oficial */
+    --evc-primary-blue: #2A5C82;
+    --evc-accent-orange: #FF8C42;
+    --evc-accent-green: #43B05C;
+    --evc-bg-light: #F4F7F6;
+    --evc-bg-card: #ffffff;
+    --evc-text-main: #333333;
+    --evc-text-muted: #6c757d;
+    --evc-border-color: #e0e0e0;
+}
+
+/* Modo oscuro activado mediante el botón de la barra */
+[data-theme="dark"] {
+    --evc-primary-blue: #1b3d58;
+    --evc-accent-orange: #ff9d5c;
+    --evc-accent-green: #4cc568;
+    --evc-bg-light: #121212;
+    --evc-bg-card: #1e1e1e;
+    --evc-text-main: #e0e0e0;
+    --evc-text-muted: #a0a0a0;
+    --evc-border-color: #333333;
+}
+
+/* ==========================================
+   TIPOGRAFÍA BASE Y TRANSICIONES
+   ========================================== */
+html { 
+    /* Permite que el texto crezca o se reduzca suavemente */
+    transition: font-size 0.3s ease; 
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--evc-bg-light);
+    color: var(--evc-text-main);
+    /* Transición suave al cambiar entre modo claro y oscuro */
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3, h4, h5, h6, .evc-brand-name, .evc-event-title, .evc-filter-title {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--evc-text-main);
+}
+
+/* ==========================================
+   FORZADO DE MODO OSCURO SOBRE BOOTSTRAP
+   ========================================== */
+/* Aquí le decimos a Bootstrap que respete nuestros colores oscuros */
+[data-theme="dark"] .bg-light, [data-theme="dark"] .bg-white { background-color: var(--evc-bg-card); }
+[data-theme="dark"] .text-dark { color: var(--evc-text-main); }
+[data-theme="dark"] .text-muted { color: var(--evc-text-muted); }
+[data-theme="dark"] .card { background-color: var(--evc-bg-card); border-color: var(--evc-border-color); }
+[data-theme="dark"] .table-light th { background-color: #2c2c2c; color: #e0e0e0; border-color: var(--evc-border-color); }
+[data-theme="dark"] .table { color: var(--evc-text-main); border-color: var(--evc-border-color); }
+
+/* ==========================================
+   ACCESIBILIDAD ESTRICTA
+   ========================================== */
+/* Contorno de navegación por teclado visible para todos los elementos interactivos */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+    outline: 3px solid var(--evc-accent-orange);
+    outline-offset: 3px;
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px rgba(255, 140, 66, 0.2);
+}
+
+/* ==========================================
+   BOTONES GENÉRICOS DE LA MARCA EVCURESO
+   ========================================== */
+.evc-btn-submit { 
+    background-color: var(--evc-primary-blue); 
+    color: #ffffff; 
+    border: 2px solid var(--evc-primary-blue); 
+    transition: all 0.2s; 
+}
+.evc-btn-submit:hover { 
+    background-color: #1e425e; 
+    border-color: #1e425e; 
+    color: #ffffff; 
+}
+
+.evc-btn-suggest { 
+    background-color: var(--evc-accent-green); 
+    color: #ffffff; 
+    border: 2px solid var(--evc-accent-green); 
+    transition: transform 0.2s; 
+}
+.evc-btn-suggest:hover { 
+    background-color: #358c49; 
+    color: #ffffff; 
+    transform: translateY(-1px); 
+}
+
+.evc-btn-moderator {
+    background-color: #f0b429;
+    color: #1f2328;
+    border: 2px solid #f0b429;
+}
+.evc-btn-moderator:hover {
+    background-color: #d89f1d;
+    border-color: #d89f1d;
+    color: #1f2328;
+}
+[data-theme="dark"] .evc-btn-moderator {
+    background-color: #ffd166;
+    border-color: #ffd166;
+    color: #1b1e23;
+}
+[data-theme="dark"] .evc-btn-moderator:hover {
+    background-color: #e6bd5c;
+    border-color: #e6bd5c;
+    color: #1b1e23;
+}
+
+/* ==========================================
+   ESTILIZACIÓN DE FORMULARIOS
+   ========================================== */
+.evc-radio-input:checked, .evc-checkbox-input:checked {
+    background-color: var(--evc-primary-blue);
+    border-color: var(--evc-primary-blue);
+}
+
+.evc-select-input {
+    background-color: transparent;
+    color: var(--evc-text-main);
+    border: 1px solid var(--evc-border-color);
+}
+.evc-select-input:focus { border-color: var(--evc-accent-orange); }
+[data-theme="dark"] .evc-select-input {
+    color: var(--evc-text-main);
+    background-color: var(--evc-bg-card);
+}
+[data-theme="dark"] .evc-select-input option {
+    color: var(--evc-text-main);
+    background-color: var(--evc-bg-card);
+}
+
+.evc-filter-icon { color: var(--evc-text-muted); }
+
+.evc-btn-clear-filters {
+    color: var(--evc-text-muted);
+    transition: color 0.2s ease;
+}
+.evc-btn-clear-filters:hover { color: var(--evc-accent-orange); }
+
+[data-theme="dark"] .evc-filter-icon,
+[data-theme="dark"] .evc-btn-clear-filters {
+    color: #c7d0d9;
+}
+
+.evc-checkbox-label {
+    color: var(--evc-text-main);
+}
+
+.evc-icon-nature { color: #2f9e44; }
+.evc-icon-culture { color: #4c6ef5; }
+.evc-icon-food { color: #e67700; }
+.evc-icon-eco { color: #37b24d; }
+.evc-icon-music { color: #1098ad; }
+
+[data-theme="dark"] .evc-icon-nature { color: #8ce99a; }
+[data-theme="dark"] .evc-icon-culture { color: #91a7ff; }
+[data-theme="dark"] .evc-icon-food { color: #ffd43b; }
+[data-theme="dark"] .evc-icon-eco { color: #b2f2bb; }
+[data-theme="dark"] .evc-icon-music { color: #99e9f2; }
+
+/* ==========================================
+   EFECTOS HOVER (Redes Sociales e Íconos Nav)
+   ========================================== */
+.evc-hover-shadow { transition: all 0.2s ease; }
+.evc-hover-shadow:hover { background-color: rgba(255,255,255,0.2); transform: scale(1.1); }
+
+.evc-social-icon { transition: transform 0.3s ease, color 0.3s ease; }
+.evc-social-icon:hover { transform: translateY(-3px) scale(1.1); color: var(--evc-accent-orange); }
+
+/* ==========================================
+   PESTAÑAS GENÉRICAS (TABS)
+   ========================================== */
+ul.evc-tabs { border-bottom: 2px solid var(--evc-border-color); }
+ul.evc-tabs .evc-tab-btn {
+    color: var(--evc-text-muted);
+    border: none; border-bottom: 3px solid transparent; border-radius: 0;
+    padding: 1rem 1.5rem; transition: all 0.3s ease; background-color: transparent;
+}
+ul.evc-tabs .evc-tab-btn:hover { color: var(--evc-primary-blue); border-bottom-color: rgba(42, 92, 130, 0.3); }
+ul.evc-tabs .evc-tab-btn.active { color: var(--evc-primary-blue); border-color: var(--evc-accent-orange); }
+[data-theme="dark"] ul.evc-tabs .evc-tab-btn:hover { color: #8fc8ff; border-bottom-color: rgba(143, 200, 255, 0.45); }
+[data-theme="dark"] ul.evc-tabs .evc-tab-btn.active { color: #8fc8ff; border-color: var(--evc-accent-orange); }
+
+/* ==========================================
+   CONTROLES DE FORMULARIOS GENÉRICOS
+   ========================================== */
+.evc-form-input {
+    border: 1px solid var(--evc-border-color);
+    background-color: transparent;
+    color: var(--evc-text-main);
+    transition: border-color 0.2s ease;
+}
+.evc-form-input:focus { border-color: var(--evc-primary-blue); box-shadow: none; }
+
+.evc-link-forgot { color: var(--evc-primary-blue); transition: color 0.2s; }
+.evc-link-forgot:hover { color: var(--evc-accent-orange); text-decoration: underline; }
+[data-theme="dark"] .evc-link-forgot {
+    color: #7fc4ff;
+}
+[data-theme="dark"] .evc-link-forgot:hover {
+    color: #ffc08f;
+}
+
+.evc-switch-input:checked { background-color: var(--evc-accent-green); border-color: var(--evc-accent-green); }
+
+.evc-promotor-label {
+    color: var(--evc-text-main);
+}
+
+.evc-promotor-help {
+    color: var(--evc-text-muted);
+}
+[data-theme="dark"] .evc-promotor-help {
+    color: #cfd6dd;
+}
+
+.evc-promotor-card {
+    background-color: #eef2f4;
+}
+[data-theme="dark"] .evc-promotor-card {
+    background-color: #2a2f36;
+}
+
+.evc-credential-title {
+    color: var(--evc-primary-blue);
+}
+[data-theme="dark"] .evc-credential-title {
+    color: #8fc8ff;
+}
+
+.evc-credential-body {
+    color: var(--evc-text-main);
+}
+
+.evc-btn-reject {
+    color: #b02a37;
+    border: 1px solid #b02a37;
+    background-color: transparent;
+}
+.evc-btn-reject:hover {
+    color: #ffffff;
+    background-color: #b02a37;
+}
+[data-theme="dark"] .evc-btn-reject {
+    color: #ff9aa2;
+    border-color: #ff9aa2;
+}
+[data-theme="dark"] .evc-btn-reject:hover {
+    color: #1e1e1e;
+    background-color: #ff9aa2;
+}
+
+.evc-badge-pending {
+    background-color: #ffd166;
+    color: #1f2328;
+}
+[data-theme="dark"] .evc-badge-pending {
+    background-color: #ffd166;
+    color: #1f2328;
+}
+
+.evc-event-title-cell {
+    color: var(--evc-primary-blue);
+}
+[data-theme="dark"] .evc-event-title-cell {
+    color: #8fc8ff;
+}
+
+.evc-sticky-sidebar {
+    position: sticky;
+    top: 84px;
+    z-index: 900;
+}
+
+/* ==========================================
+   BARRA LATERAL Y FILTROS (ASIDE)
+   ========================================== */
+.evc-sidebar-filters .card {
+    border-radius: 12px;
+   
+}
+
+/* ==========================================
+   ESTILOS DE LA PANTALLA DE PERFIL
+   ========================================== */
+.evc-avatar-placeholder {
+    width: 64px;
+    height: 64px;
+    background-color: var(--evc-primary-blue);
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(255, 140, 66, 0.3);
+}
+
+.letter-spacing { letter-spacing: 0.5px; }
+
+/* TABLAS INTERNAS */
+.table-responsive th {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--evc-text-muted);
+}
+
+.evc-footer {
+    background-color: var(--evc-primary-blue);
+    border-top: 4px solid var(--evc-accent-orange);
+}
+
+.evc-footer-copy {
+    color: #e8f1ff;
+    opacity: 0.92;
+}
+
+@media (max-width: 767.98px) {
+    .evc-sticky-sidebar {
+        position: static;
+        top: auto;
+    }
+}

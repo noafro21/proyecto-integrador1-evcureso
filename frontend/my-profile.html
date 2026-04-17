@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Evcureso</title>
+    <link rel="icon" type="image/png" href="./assets/images/logo-1.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/global-style.css">
+    <link rel="stylesheet" href="./css/header-style.css">
+</head>
+
+<body class="bg-light">
+
+    <header class="evc-header text-white" id="navbar-container"></header>
+
+    <main class="evc-main-container container my-5">
+        <header class="row mb-5 align-items-center evc-profile-header">
+            <div class="col-md-8 d-flex align-items-center">
+                <div id="profileAvatar"
+                    class="evc-avatar-placeholder me-4 d-flex justify-content-center align-items-center text-white fw-bold fs-3"
+                    aria-hidden="true">-</div>
+                <div>
+                    <h1 id="profileGreeting" class="h3 fw-bold mb-1">Cargando perfil...</h1>
+                    <p id="profileRoleDesc" class="text-muted mb-0">Obteniendo tus datos...</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-md-end mt-4 mt-md-0">
+                <section class="card bg-white border-0 shadow-sm d-inline-block px-4 py-3"
+                    aria-label="Puntos de descubrimiento">
+                    <span class="d-block small text-muted fw-bold text-uppercase" style="letter-spacing: 0.5px;">Puntos
+                        de Descubrimiento</span>
+                    <span id="profilePoints"
+                        class="h3 fw-bold text-success mb-0 d-flex align-items-center justify-content-md-end mt-1">
+                        🏆 0 pts
+                    </span>
+                </section>
+            </div>
+        </header>
+
+        <ul class="nav nav-tabs evc-tabs mb-4" id="profileTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active fw-bold evc-tab-btn" id="plan-tab" data-bs-toggle="tab"
+                    data-bs-target="#plan-pane" type="button" role="tab">
+                    <i class="fa-regular fa-calendar-check me-2"></i> Mi Plan para el Finde
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold evc-tab-btn" id="sug-tab" data-bs-toggle="tab"
+                    data-bs-target="#sug-pane" type="button" role="tab">
+                    <i class="fa-regular fa-lightbulb me-2"></i> Mis Sugerencias
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold evc-tab-btn" id="hist-tab" data-bs-toggle="tab"
+                    data-bs-target="#hist-pane" type="button" role="tab">
+                    <i class="fa-solid fa-clock-rotate-left me-2"></i> Historial
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="profileTabsContent">
+            <div class="tab-pane fade show active" id="plan-pane" role="tabpanel" tabindex="0">
+                <div id="savedEventsContainer" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" role="list">
+                    <div class="col-12 text-center py-5 text-muted">Cargando tu plan para el finde...</div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="sug-pane" role="tabpanel" tabindex="0">
+                <div class="card border-0 shadow-sm p-4">
+                    <h2 class="h5 fw-bold mb-4">Estado de tus aportes comunitarios</h2>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col">Evento Propuesto</th>
+                                    <th scope="col">Fecha Sugerida</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Puntos</th>
+                                </tr>
+                            </thead>
+                            <tbody id="suggestionsContainer">
+                                <tr>
+                                    <td colspan="4" class="text-center py-4 text-muted">Cargando sugerencias...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="hist-pane" role="tabpanel" tabindex="0">
+                <div class="text-center py-5">
+                    <p class="text-muted fs-5">Aún no tienes eventos finalizados en tu historial.</p>
+                    <a href="index.html" class="btn btn-primary fw-bold mt-2">Explorar nuevos eventos</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/load-navbar.js"></script>
+    <script src="./js/my-profile.js"></script>
+</body>
+
+</html>
