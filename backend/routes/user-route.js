@@ -60,17 +60,6 @@ router.post("/register", async (req, res) => {
   }
 });
 
-/*
-Ejemplo para probar en Postman:
-POST http://localhost:3000/usuarios/register
-{
-  "fullName": "Ana López",
-  "email": "ana@test.com",
-  "password": "123",
-  "isPromoter": false
-}
-*/
-
 // ==========================================
 // POST: Iniciar sesión (Login)
 // ==========================================
@@ -118,15 +107,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-/*
-Ejemplo para probar en Postman:
-POST http://localhost:3000/usuarios/login
-{
-  "email": "ana@test.com",
-  "password": "123"
-}
-*/
-
 // ==========================================
 // GET: Solicitar los datos de los usuarios a la BD
 // ==========================================
@@ -138,11 +118,6 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
-/*
-Ejemplo para probar en Postman:
-GET http://localhost:3000/usuarios
-*/
 
 // ==========================================
 // GET: Obtener todos los Promotores "Pendientes de Aprobar"
@@ -196,17 +171,8 @@ router.put("/agregar-plan", async (req, res) => {
   }
 });
 
-/*
-Ejemplo para Postman:
-PUT http://localhost:3000/usuarios/agregar-plan
-{
-  "email": "ana@test.com",
-  "eventoId": "ID_DEL_EVENTO_AQUI"
-}
-*/
-
 // ==========================================
-// PUT: Quitar un evento de "Mi Plan para el Finde" (NUEVO)
+// PUT: Quitar un evento de "Mi Plan para el Finde"
 // ==========================================
 router.put("/quitar-plan", async (req, res) => {
   const { email, eventoId } = req.body;

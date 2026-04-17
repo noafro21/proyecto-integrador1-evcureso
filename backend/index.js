@@ -9,7 +9,7 @@ require("dotenv").config({ path: path.join(__dirname, ".env") }); // Se importa 
 const app = express(); // Crear una instancia de express
 const PORT = process.env.PORT || 3000; // Usar el puerto indicado en .env o el 3000
 
-// Importación de rutas (Las crearemos en el siguiente paso)
+// Importacion de rutas
 const userRoute = require("./routes/user-route");
 const eventRoute = require("./routes/event-route");
 
@@ -22,7 +22,7 @@ app.use(cors());
 // Fix para el error querySrv ECONNREFUSED en MongoDB Atlas
 require("node:dns/promises").setServers(["1.1.1.1", "8.8.8.8"]);
 
-// Rutas de Evcureso (Descomentaremos cuando existan)
+// Rutas de Evcureso
 app.use("/usuarios", userRoute);
 app.use("/eventos", eventRoute);
 
@@ -35,20 +35,20 @@ async function startServer() {
   try {
     if (process.env.MONGODB_URI) {
       await mongoose.connect(process.env.MONGODB_URI);
-      console.log("✅ MongoDB Atlas conectado para Evcureso");
+      console.info("MongoDB Atlas conectado para Evcureso");
     } else {
-      console.log(
-        "⚠️ MONGODB_URI no está definida; el servidor arrancó sin base de datos.",
+      console.warn(
+        "MONGODB_URI no esta definida; el servidor arranco sin base de datos.",
       );
     }
 
     app.listen(PORT, () => {
-      console.log("🚀 Servidor corriendo en http://localhost:" + PORT);
+      console.info("Servidor corriendo en http://localhost:" + PORT);
     });
   } catch (error) {
-    console.log("❌ Ocurrió un error al conectarse con MongoDB: ", error);
+    console.error("Ocurrio un error al conectarse con MongoDB:", error);
     app.listen(PORT, () => {
-      console.log("🚀 Servidor corriendo en http://localhost:" + PORT);
+      console.info("Servidor corriendo en http://localhost:" + PORT);
     });
   }
 }

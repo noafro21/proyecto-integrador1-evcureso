@@ -98,7 +98,6 @@ router.get("/", async (req, res) => {
 
 // ==========================================
 // GET: Obtener eventos pendientes de verificación
-// (DEBE IR AQUÍ, ANTES DEL /:id)
 // ==========================================
 router.get("/pendientes", async (req, res) => {
   try {
@@ -112,10 +111,7 @@ router.get("/pendientes", async (req, res) => {
 });
 
 // ==========================================
-// PUT: Cancelar un evento (Validación RF-06)
-// ==========================================
 // 5. PUT: Aprobar un evento comunitario (Solo Moderadores)
-// (Esta ruta DEBE estar antes que /:id)
 // ==========================================
 router.put("/aprobar-comunitario", async (req, res) => {
   const { eventoId, moderadorId } = req.body;
@@ -264,7 +260,6 @@ router.get("/moderador/:moderadorId/gestion", async (req, res) => {
 
 // ==========================================
 // 6. PUT: Cancelar un evento (Validación RF-06)
-// (Esta ruta dinámica VA AL FINAL)
 // ==========================================
 router.put("/:id/cancelar", async (req, res) => {
   try {

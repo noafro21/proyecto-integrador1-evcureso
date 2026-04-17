@@ -1,57 +1,76 @@
-# Evcureso: Plataforma de Eventos Localizada
+# Evcureso
 
-Evcureso es una plataforma colaborativa diseñada para centralizar el descubrimiento de eventos culturales, recreativos y sociales en tiempo real. Mediante el uso de geolocalización, el sistema permite a los usuarios descubrir actividades en su radio de interés, superando las limitaciones de la información tradicional.
+Plataforma web comunitaria para descubrir, promover y gestionar eventos locales.
 
-## Convenciones de Nomenclatura y Formato
+## Descripcion
 
-### Para mantener la consistencia en el proyecto, se establecen las siguientes reglas:
+Evcureso conecta tres tipos de usuarios:
 
-1. **Archivos y Carpetas:** Se utilizará kebab-case (ejemplo: gestion-eventos.js, main-style.css).
+1. Exploradores: buscan eventos y arman su plan del fin de semana.
+2. Promotores: publican eventos oficiales.
+3. Moderadores: revisan sugerencias comunitarias y gestionan usuarios.
 
-2. **Variables y Funciones:** Se utilizará camelCase (ejemplo: const eventLocation;, function calculateDistance()).
+## Estructura del Proyecto
 
-3. **Clases (CSS y JS):** Se utilizará PascalCase para clases de JavaScript y kebab-case para clases de CSS.
+1. Frontend: HTML5, CSS3, JavaScript y Bootstrap 5.
+2. Backend: Node.js, Express y MongoDB con Mongoose.
 
-4. **Idiomas:** El código (variables, funciones) se escribirá en Inglés, mientras que la documentación, comentarios y la interfaz de usuario final estarán en Español.
+## Requisitos Previos
 
-## Estrategia de Git y Control de Versiones
+1. Node.js 18 o superior.
+2. npm.
+3. MongoDB Atlas o instancia local de MongoDB.
 
-### Se implementará el flujo de trabajo _Gitflow_, que permite una gestión organizada mediante ramas especializadas:
+## Instalacion
 
-#### Ramas Principales
+1. Clonar el repositorio.
 
-- main: Contiene el código oficial de producción. Cada commit en esta rama corresponde a una versión estable y etiquetada bajo la convención de Semantic Versioning (vMajor.Minor.Patch), por ejemplo: v1.0.0.
+```bash
+git clone https://github.com/TU-USUARIO/evcureso.git
+cd evcureso
+```
 
-- develop: Es la rama principal de desarrollo donde se integran todas las funcionalidades completadas antes de pasar a producción.
+2. Instalar dependencias del backend.
 
-#### Ramas de Soporte
+```bash
+cd backend
+npm install
+```
 
-- feature/nombre-funcionalidad: Ramas que nacen de develop para trabajar en características específicas. Una vez finalizadas, se reintegran mediante un Pull Request.
+3. Crear el archivo `backend/.env` con al menos esta variable.
 
-- release/vX.X.X: Ramas de preparación para una nueva entrega. Se utilizan para correcciones finales y limpieza antes de fusionar con main y develop.
+```env
+MONGODB_URI=tu_uri_de_mongodb
+PORT=3000
+```
 
-- hotfix/nombre-error: Ramas que nacen de main para corregir errores críticos en producción de forma inmediata.
+## Ejecucion en Desarrollo
 
-### Convención de Commits
+1. Iniciar el backend.
 
-Los mensajes de commit deben ser descriptivos y seguir el formato: tipo: descripción breve.
+```bash
+cd backend
+node index.js
+```
 
-#### Tipos de commit permitidos:
+2. Abrir el frontend desde los archivos HTML en la carpeta `frontend`.
 
-- feat: Nueva funcionalidad o recurso en el programa que no existía.
+## Convenciones de Codigo
 
-- fix: Corrección de un error (bug).
+1. Archivos y carpetas: kebab-case.
+2. Variables y funciones: camelCase.
+3. Clases JS: PascalCase.
+4. Idioma: codigo en ingles, interfaz y documentacion en espanol.
 
-- updated: se reemplazó un recurso o código por otro realizado por alguien más (ejemplo: una prueba para la ventana de inicio de sesión).
+## Gitflow
 
-- incomplete: commit especial que indica que se ha respaldado una versión inestable o incompleta de la funcionalidad.
+1. Ramas principales: `main` y `develop`.
+2. Ramas de trabajo: `feature/*`, `release/*`, `hotfix/*`.
 
-- docs: Cambios en la documentación (.md).
+## Convencion de Commits
 
-- style: Cambios que no afectan la lógica (espacios, formato, puntos y comas).
+Formato: `tipo: descripcion breve`
 
-- refactor: Cambio en el código que no corrige un error ni añade funcionalidad.
+Tipos recomendados: `feat`, `fix`, `docs`, `style`, `refactor`, `test`.
 
-- test: Añadir o corregir pruebas.
-
-_Proyecto Integrador 1 - Universidad CENFOTEC - 2026_
+Proyecto Integrador 1 - Universidad CENFOTEC - 2026.
