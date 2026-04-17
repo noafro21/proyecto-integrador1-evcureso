@@ -114,19 +114,6 @@ router.get("/pendientes", async (req, res) => {
 // ==========================================
 // PUT: Cancelar un evento (Validación RF-06)
 // ==========================================
-router.get("/pendientes", async (req, res) => {
-  try {
-    const eventos = await Event.find({
-      status: "Pendiente de Verificación",
-    }).populate("creator", "fullName email");
-
-    res.json(eventos);
-  } catch (error) {
-    res.status(500).json({ mensajeError: error.message });
-  }
-});
-
-// ==========================================
 // 5. PUT: Aprobar un evento comunitario (Solo Moderadores)
 // (Esta ruta DEBE estar antes que /:id)
 // ==========================================
@@ -178,6 +165,104 @@ router.put("/aprobar-comunitario", async (req, res) => {
 });
 
 // ==========================================
+// 6. DELETE: Rechazar evento comunitario pendiente (solo moderador)
+// ==========================================
+router.delete("/:id/rechazar-comunitario", async (req, res) => {
+  try {
+    const { moderadorId } = req.body;
+    const eventoId = req.params.id;
+
+    if (!moderadorId) {
+      return res
+        .status(400)
+        .json({ mensajeError: "El ID del moderador es obligatorio." });
+    }
+
+    const moderador = await User.findById(moderadorId);
+    if (!moderador) {
+      return res
+        .status(404)
+        .json({ mensajeError: "Usuario moderador no encontrado." });
+    }
+
+    if (moderador.role !== "Moderador") {
+      return res.status(403).json({
+        mensajeError:
+          "Acceso denegado. Solo los Moderadores pueden rechazar eventos comunitarios.",
+      });
+    }
+
+    const evento = await Event.findById(eventoId);
+    if (!evento) {
+      return res.status(404).json({ mensajeError: "Evento no encontrado." });
+    }
+
+    if (evento.status !== "Pendiente de Verificación") {
+      return res.status(400).json({
+        mensajeError:
+          "Solo se pueden rechazar eventos con estado Pendiente de Verificación.",
+      });
+    }
+
+    await Event.findByIdAndDelete(eventoId);
+
+    res.status(200).json({
+      mensaje: "Evento comunitario rechazado y eliminado correctamente.",
+    });
+  } catch (error) {
+    res.status(500).json({ mensajeError: error.message });
+  }
+});
+
+// ==========================================
+// 7. GET: Eventos gestionables por moderador
+// Incluye eventos vencidos y los creados por el moderador
+// ==========================================
+router.get("/moderador/:moderadorId/gestion", async (req, res) => {
+  try {
+    const { moderadorId } = req.params;
+
+    const moderador = await User.findById(moderadorId);
+    if (!moderador) {
+      return res
+        .status(404)
+        .json({ mensajeError: "Usuario moderador no encontrado." });
+    }
+
+    if (moderador.role !== "Moderador") {
+      return res.status(403).json({
+        mensajeError:
+          "Acceso denegado. Solo los Moderadores pueden gestionar eventos.",
+      });
+    }
+
+    const now = new Date();
+
+    const eventos = await Event.find({
+      $or: [{ eventDate: { $lt: now } }, { creator: moderadorId }],
+    })
+      .populate("creator", "fullName email role")
+      .sort({ eventDate: 1 });
+
+    const eventosGestion = eventos.map((evento) => {
+      const esVencido = new Date(evento.eventDate) < now;
+      const esPropio =
+        evento.creator && evento.creator._id.equals(moderador._id);
+
+      return {
+        ...evento.toObject(),
+        esVencido,
+        esPropio,
+      };
+    });
+
+    res.status(200).json(eventosGestion);
+  } catch (error) {
+    res.status(500).json({ mensajeError: error.message });
+  }
+});
+
+// ==========================================
 // 6. PUT: Cancelar un evento (Validación RF-06)
 // (Esta ruta dinámica VA AL FINAL)
 // ==========================================
@@ -213,11 +298,49 @@ router.put("/:id/cancelar", async (req, res) => {
 });
 
 // ==========================================
-// 7. DELETE: Eliminar un evento permanentemente
+// 8. DELETE: Eliminar un evento (moderador)
+// Regla: puede eliminar si está vencido o si es de su autoría
 // ==========================================
 router.delete("/:id/eliminar", async (req, res) => {
   try {
+    const { moderadorId } = req.body;
     const eventoId = req.params.id;
+
+    if (!moderadorId) {
+      return res
+        .status(400)
+        .json({ mensajeError: "El ID del moderador es obligatorio." });
+    }
+
+    const moderador = await User.findById(moderadorId);
+    if (!moderador) {
+      return res
+        .status(404)
+        .json({ mensajeError: "Usuario moderador no encontrado." });
+    }
+
+    if (moderador.role !== "Moderador") {
+      return res.status(403).json({
+        mensajeError:
+          "Acceso denegado. Solo los Moderadores pueden eliminar eventos.",
+      });
+    }
+
+    const evento = await Event.findById(eventoId);
+    if (!evento) {
+      return res.status(404).json({ mensajeError: "Evento no encontrado." });
+    }
+
+    const esVencido = new Date(evento.eventDate) < new Date();
+    const esPropio = evento.creator && evento.creator.equals(moderador._id);
+
+    if (!esVencido && !esPropio) {
+      return res.status(403).json({
+        mensajeError:
+          "Solo puedes eliminar eventos vencidos o eventos creados por ti.",
+      });
+    }
+
     const eventoEliminado = await Event.findByIdAndDelete(eventoId);
 
     if (!eventoEliminado) {
@@ -227,6 +350,39 @@ router.delete("/:id/eliminar", async (req, res) => {
     res.status(200).json({
       mensaje: "Evento eliminado permanentemente.",
       evento: eventoEliminado,
+    });
+  } catch (error) {
+    res.status(500).json({ mensajeError: error.message });
+  }
+});
+
+// ==========================================
+// 9. DELETE: Eliminar todos los eventos vencidos (moderador)
+// ==========================================
+router.delete("/moderador/:moderadorId/vencidos", async (req, res) => {
+  try {
+    const { moderadorId } = req.params;
+
+    const moderador = await User.findById(moderadorId);
+    if (!moderador) {
+      return res
+        .status(404)
+        .json({ mensajeError: "Usuario moderador no encontrado." });
+    }
+
+    if (moderador.role !== "Moderador") {
+      return res.status(403).json({
+        mensajeError:
+          "Acceso denegado. Solo los Moderadores pueden eliminar eventos vencidos.",
+      });
+    }
+
+    const now = new Date();
+    const resultado = await Event.deleteMany({ eventDate: { $lt: now } });
+
+    res.status(200).json({
+      mensaje: "Eventos vencidos eliminados correctamente.",
+      eliminados: resultado.deletedCount,
     });
   } catch (error) {
     res.status(500).json({ mensajeError: error.message });
